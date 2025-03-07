@@ -7,11 +7,13 @@ import "driver.js/dist/driver.css";
 import Navbar from "../components/Navbar";
 import textProcessing from "../lib/textProcessing";
 import dayjs from "../lib/dayjsConfig";
+import Chart from "../components/Chart";
 
 const Homepage = () => {
   const { data: GT, isLoading: loadGT } = useGT();
   const { data: GD, isLoading: loadGD } = useGD();
 
+  console.log(GD)
   const driverObj = driver({
     popoverClass: "driverjs-theme",
     showProgress: true,
@@ -395,10 +397,13 @@ const Homepage = () => {
                 </table>
               </div>
             </div>
+
             {/* End - Information Section  */}
           </div>
         </div>
       </div>
+
+      
     </motion.div>
   );
 };

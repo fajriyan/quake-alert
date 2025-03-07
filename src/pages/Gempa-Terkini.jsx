@@ -4,9 +4,12 @@ import { motion } from "framer-motion";
 import { useGTR } from "../features/fetch";
 import textProcessing from "../lib/textProcessing";
 import dayjs from "../lib/dayjsConfig";
+import { useState } from "react";
+import Chart from "../components/Chart";
 
 const GempaTerkini = () => {
   const { data: GD, isLoading: loadGD } = useGTR();
+    const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -26,6 +29,10 @@ const GempaTerkini = () => {
               Pada halaman ini ditampilkan data Gempa Terkini di seluruh
               Indonesia berdasarkan data BMKG Terbaru.
             </p>
+
+            <button onClick={() => setIsOpen(true)} className="mt-2 px-3 py-1.5 text-xs font-semibold bg-purple-900 hover:bg-purple-950 text-white rounded-md ">
+              Buka Grafik
+            </button>
 
             <div className="mt-5 overflow-x-scroll md:overflow-visible border border-slate-200 ">
               <table className="min-w-full divide-y divide-gray-200 text-sm dark:bg-gray-400/15 dark:backdrop-blur-md">
@@ -156,6 +163,24 @@ const GempaTerkini = () => {
             </div>
           </div>
         </div>
+
+        {isOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-[999]">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-[650px] animate-fade-in">
+            <div className="flex justify-center h-[300px]">
+                <Chart dataProps={GD}/>
+              </div>
+
+            {/* Tombol untuk menutup modal */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="mt-4 px-3 py-1.5 text-xs font-semibold bg-purple-900 hover:bg-purple-950 text-white rounded-md "
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      )}
       </motion.div>
     </>
   );
