@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Magnitudo from "../components/Magnitudo";
-import useGT, { useGD } from "../features/fetch";
+import useGT, { useBMKGsummary, useGD, useGMBKGFeel } from "../features/fetch";
 import { motion } from "framer-motion";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
@@ -10,10 +10,11 @@ import dayjs from "../lib/dayjsConfig";
 import Chart from "../components/Chart";
 
 const Homepage = () => {
-  const { data: GT, isLoading: loadGT } = useGT();
-  const { data: GD, isLoading: loadGD } = useGD();
+  const { data: GT, isLoading: loadGT } = useBMKGsummary();
+  const { data: GD, isLoading: loadGD } = useGMBKGFeel();
 
-  console.log(GD)
+
+  console.log(GT)
   const driverObj = driver({
     popoverClass: "driverjs-theme",
     showProgress: true,
@@ -84,7 +85,7 @@ const Homepage = () => {
             <div className="">
               <div className="md:sticky md:top-[70px] p-1 rounded-lg border overflow-hidden flex justify-center bg-white">
                 <a
-                  href={"https://data.bmkg.go.id/DataMKG/TEWS/" + GT?.shakemap}
+                  href={"https://data.bmkg.go.id/DataMKG/TEWS/" + GT?.Shakemap}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex-grow "
@@ -97,12 +98,12 @@ const Homepage = () => {
                     <div className="">
                       <img
                         src={
-                          "https://data.bmkg.go.id/DataMKG/TEWS/" + GT?.shakemap
+                          "https://data.bmkg.go.id/DataMKG/TEWS/" + GT?.Shakemap
                         }
                         alt=""
                         width="100%"
                         height="100%"
-                        className="object-contain h-[400px] group-hover:scale-105 transition-all duration-700"
+                        className="object-contain h-[406px] group-hover:scale-105 transition-all duration-700"
                         id="image-shakemap"
                       />
                     </div>
@@ -124,7 +125,7 @@ const Homepage = () => {
               >
                 <div className="mt-2 flex gap-3">
                   <button
-                    className=" bg-slate-900 w-full border border-slate-800 text-white  font-medium py-2 rounded-md hover:bg-violet-900 dark:bg-violet-800 dark:border-violet-800 dark:shadow-lg"
+                    className=" bg-purple-900 w-full border border-purple-900 text-white  font-medium py-2 rounded-md hover:bg-violet-900 dark:bg-violet-800 dark:border-violet-800 dark:shadow-lg"
                     onClick={() => driverObj.drive()}
                   >
                     Mulai Website Tour
@@ -161,7 +162,7 @@ const Homepage = () => {
                   </svg>
                   <p className="mt-2 text-sm font-semibold">Tanggal</p>
                   <Skeleton />
-                  <p className="text-xs">{GT?.tanggal}</p>
+                  <p className="text-xs">{GT?.Tanggal}</p>
                 </div>
                 <div className="w-[32%] md:w-[16%] flex items-center flex-col">
                   <svg
@@ -176,7 +177,7 @@ const Homepage = () => {
                   </svg>
                   <p className="mt-2 text-sm font-semibold">Waktu</p>
                   <Skeleton />
-                  <p className="text-xs">{GT?.jam}</p>
+                  <p className="text-xs">{GT?.Jam}</p>
                 </div>
                 <div className="w-[32%] md:w-[16%] flex items-center flex-col">
                   <svg
@@ -192,10 +193,10 @@ const Homepage = () => {
                   <p className="mt-2 text-sm font-semibold">Magnitudo</p>
                   <div className="text-xs flex">
                     <Skeleton />
-                    {GT?.magnitude}{" "}
+                    {GT?.Magnitude}{" "}
                     {loadGT ? null : (
                       <span className="animate-pulse">
-                        <Magnitudo mgFill={GT?.magnitude} />
+                        <Magnitudo mgFill={GT?.Magnitude} />
                       </span>
                     )}
                   </div>
@@ -213,7 +214,7 @@ const Homepage = () => {
                   </svg>
                   <p className="mt-2 text-sm font-semibold">Koordinat</p>
                   <Skeleton />
-                  <p className="text-xs">{GT?.coordinates}</p>
+                  <p className="text-xs">{GT?.Coordinates}</p>
                 </div>
                 <div className="w-[32%] md:w-[16%] flex items-center flex-col ">
                   <svg
@@ -229,7 +230,7 @@ const Homepage = () => {
                   <p className="mt-2 text-sm font-semibold">Lintang, Bujur</p>
                   <div className="text-xs">
                     <Skeleton />
-                    {GT?.lintang} {GT?.bujur}
+                    {GT?.Lintang} {GT?.Bujur}
                   </div>
                 </div>
                 <div className="w-full my-2 md:hidden"></div>
@@ -247,7 +248,7 @@ const Homepage = () => {
                   </svg>
                   <p className="mt-2 text-sm font-semibold">Kedalaman</p>
                   <Skeleton />
-                  <p className="text-xs">{GT?.kedalaman}</p>
+                  <p className="text-xs">{GT?.Kedalaman}</p>
                 </div>
 
                 <div className="w-full my-2">
@@ -255,23 +256,23 @@ const Homepage = () => {
                 </div>
 
                 <ul className="text-sm list-disc pl-5">
-                <div className="text-sm border border-slate-700 mb-4 rounded-md px-3 w-max">Terjadi Gempa : {dayjs(dayjs(GT?.Tanggal, "DD MMM YYYY").format("YYYY-MM-DD")+"T"+ GT?.jam?.replace("WIB", "").trim()).fromNow()}</div>
+                <div className="text-sm border border-slate-700 mb-4 rounded-md px-3 w-max">Terjadi Gempa : {dayjs(dayjs(GT?.Tanggal, "DD MMM YYYY").format("YYYY-MM-DD")+"T"+ GT?.Jam?.replace("WIB", "").trim()).fromNow()}</div>
                   <li>
                     <span className="flex gap-1 capitalize">
                       Dirasakan : <Skeleton width={"w-40"} />
-                      {GT?.dirasakan}
+                      {GT?.Dirasakan}
                     </span>
                   </li>
                   <li>
                     <span className="flex gap-1 capitalize">
                       Wilayah : <Skeleton width={"w-72"} />
-                      {textProcessing(GT?.wilayah)}
+                      {textProcessing(GT?.Wilayah)}
                     </span>
                   </li>
                   <li>
                     <span className="flex gap-1 flex-grow capitalize">
                       Potensi : <Skeleton width={"w-64"} />
-                      {GT?.potensi}
+                      {GT?.Potensi}
                     </span>
                   </li>
                 </ul>
@@ -283,7 +284,7 @@ const Homepage = () => {
               >
                 <div className="border-b px-3 py-2 sticky top-0 dark:text-neutral-100">
                   <h2 className="font-semibold text-sm text-gray-900 dark:text-neutral-100">
-                    #Data 3 Gempa Terbaru Yang Dirasakan
+                    #4 Data Gempa Terbaru Yang Dirasakan
                   </h2>
                 </div>
                 <table className="min-w-full divide-y divide-gray-200 text-sm">
@@ -332,7 +333,7 @@ const Homepage = () => {
                         </td>
                       </tr>
                     ) : (
-                      GD?.slice(0, 3).map((GDM) => (
+                      GD?.slice(0, 4).map((GDM) => (
                         <tr
                           className="group text-slate-700 dark:text-neutral-100"
                           key={GDM?.DateTime + GDM?.Bujur + GDM?.Lintang}
@@ -361,7 +362,7 @@ const Homepage = () => {
                             {GDM?.Kedalaman}
                           </td>
                           <td className="whitespace-nowrap ps-4 py-2  group-hover:bg-slate-50 dark:group-hover:bg-slate-200 dark:group-hover:text-slate-900  capitalize">
-                            {textProcessing(GT?.wilayah)}
+                            {textProcessing(GT?.Wilayah)}
                           </td>
                           <td className="whitespace-nowrap px-5 md:px-1 py-2  flex group-hover:bg-slate-50 dark:group-hover:bg-slate-200 dark:group-hover:text-slate-900  hover:underline  relative">
                             <a
@@ -395,7 +396,7 @@ const Homepage = () => {
                     )}
                   </tbody>
                 </table>
-              </div>
+              </div>              
             </div>
 
             {/* End - Information Section  */}

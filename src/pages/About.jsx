@@ -20,17 +20,6 @@ const About = () => {
       transition={{ delay: 0 }}
       className="hidden-bars-y"
     >
-
-    <div>
-      <h1>Diff For Humans</h1>
-      <ul>
-        {dates.map((date, index) => (
-          <li key={index}>
-            {dayjs(date).fromNow()} 
-          </li>
-        ))}
-      </ul>
-    </div>
       <div className="dark:bg-gradient-to-r min-h-screen from-gray-800 via-gray-900 to-black">
         <div className="">
           <img

@@ -1,17 +1,16 @@
 import Magnitudo from "../components/Magnitudo";
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
-import { useGD } from "../features/fetch";
+import { useGD, useGMBKGFeel } from "../features/fetch";
 import textProcessing from "../lib/textProcessing";
 import dayjs from "../lib/dayjsConfig";
 import Chart from "../components/Chart";
 import { useState } from "react";
 
 const GempaDirasakan = () => {
-  const { data: GD, isLoading: loadGD } = useGD();
+  const { data: GD, isLoading: loadGD } = useGMBKGFeel();
   const [isOpen, setIsOpen] = useState(false);
 
-  
   return (
     <>
       <motion.div

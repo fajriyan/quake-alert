@@ -1,15 +1,15 @@
 import Magnitudo from "../components/Magnitudo";
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
-import { useGTR } from "../features/fetch";
+import { useGMBKGTerkini, useGTR } from "../features/fetch";
 import textProcessing from "../lib/textProcessing";
 import dayjs from "../lib/dayjsConfig";
 import { useState } from "react";
 import Chart from "../components/Chart";
 
 const GempaTerkini = () => {
-  const { data: GD, isLoading: loadGD } = useGTR();
-    const [isOpen, setIsOpen] = useState(false);
+  const { data: GD, isLoading: loadGD } = useGMBKGTerkini();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
