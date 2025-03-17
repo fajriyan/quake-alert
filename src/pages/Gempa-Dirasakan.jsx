@@ -13,13 +13,7 @@ const GempaDirasakan = () => {
 
   return (
     <>
-      <motion.div
-        initial={{ x: 70 }}
-        animate={{ x: 0 }}
-        transition={{ delay: 0 }}
-        className="hidden-bars-y"
-      >
-        <div className="dark:bg-gradient-to-r min-h-screen from-gray-800 via-gray-900 to-black mb-16 duration-500">
+      <div className="dark:bg-gradient-to-r min-h-screen from-gray-800 via-gray-900 to-black mb-16 duration-500">
           <Navbar />
           <div className="container mx-auto py-2 px-3 md:px-0">
             <h1 className="font-bold text-xl text-slate-700 dark:text-neutral-100">
@@ -157,16 +151,15 @@ const GempaDirasakan = () => {
               </span>
             </div>
           </div>
-        </div>
+      </div>
 
-        {isOpen && (
+      {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-[999]">
           <div className="bg-white p-6 rounded-lg shadow-lg w-[650px] animate-fade-in">
             <div className="flex justify-center h-[300px]">
                 <Chart dataProps={GD}/>
               </div>
 
-            {/* Tombol untuk menutup modal */}
             <button
               onClick={() => setIsOpen(false)}
               className="mt-4 px-3 py-1.5 text-xs font-semibold bg-purple-900 hover:bg-purple-950 text-white rounded-md "
@@ -176,7 +169,6 @@ const GempaDirasakan = () => {
           </div>
         </div>
       )}
-      </motion.div>
     </>
   );
 };

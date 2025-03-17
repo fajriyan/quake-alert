@@ -3,19 +3,15 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
 import { useGD } from '../features/fetch';
 import dayjs from 'dayjs';
-// import dayjs from "../lib/dayjsConfig";
-
-
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const Chart = ({dataProps}) => {
 
-   console.log(dataProps)
-   const labels = dataProps?.map((item) => 
+   const labels = dataProps?.reverse()?.map((item) => 
       dayjs(`${item.Tanggal} ${item.Jam.replace(" WIB", "")}`, "DD MMM YYYY HH:mm:ss").format("HH:mm")
     );
-   const magnitudes = dataProps?.map((item) => parseFloat(item.Magnitude));
+   const magnitudes = dataProps?.reverse()?.map((item) => parseFloat(item.Magnitude));
 
    const data = {
       labels,
@@ -38,6 +34,14 @@ const Chart = ({dataProps}) => {
         },
         tooltip: {
           enabled: true,
+          callbacks: {
+            label: function (tooltipItem) {
+              const index = tooltipItem.dataIndex;
+              const item = dataProps.slice().reverse()[index]; // Ambil item asli setelah dibalik
+              const formattedDate = dayjs(`${item.Tanggal} ${item.Jam.replace(" WIB", "")}`, "DD MMM YYYY HH:mm:ss").format("DD MMM YYYY HH:mm");
+              return `Magnitude: ${item.Magnitude} | ${formattedDate}`;
+            },
+          },
         },
       },
       scales: {
@@ -56,6 +60,7 @@ const Chart = ({dataProps}) => {
         },
       },
     };
+    
 
 
   return (

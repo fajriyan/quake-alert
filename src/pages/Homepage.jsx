@@ -71,11 +71,7 @@ const Homepage = () => {
   };
 
   return (
-    <motion.div
-      initial={{ x: -70 }}
-      animate={{ x: 0 }}
-      transition={{ delay: 0.1 }}
-    >
+    <>
       <div className="selection:bg-violet-200 selection:text-black min-h-screen dark:bg-gradient-to-r from-gray-800 via-gray-900 to-black pb-10">
         <Navbar />
         <div className="container mx-auto pt-5">
@@ -403,9 +399,7 @@ const Homepage = () => {
           </div>
         </div>
       </div>
-
-      
-    </motion.div>
+    </>
   );
 };
 

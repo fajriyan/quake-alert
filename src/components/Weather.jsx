@@ -64,7 +64,7 @@ const Weather = () => {
           </div>
       ) : (
         <div className="w-max rounded-md flex items-center gap-2">
-          <img src={`https://openweathermap.org/img/wn/${data?.weather[0]?.icon}@4x.png`} alt="icon cloud" className='w-[50px]' />
+          <img src={`https://openweathermap.org/img/wn/${data?.weather[0]?.icon}@4x.png`} alt="icon cloud" className='w-[50px]' width="auto" height="auto" />
           <div className="">
             <p className='font-semibold'>{data?.main?.temp}°C</p>
             <p className='text-xs -mt-1'>

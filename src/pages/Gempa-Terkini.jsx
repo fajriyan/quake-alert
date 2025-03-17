@@ -13,12 +13,6 @@ const GempaTerkini = () => {
 
   return (
     <>
-      <motion.div
-        initial={{ x: 70 }}
-        animate={{ x: 0 }}
-        transition={{ delay: 0 }}
-        className="hidden-bars-y"
-      >
         <div className="dark:bg-gradient-to-r min-h-screen from-gray-800 via-gray-900 to-black mb-16">
           <Navbar />
           <div className="container mx-auto py-2 px-3 md:px-0">
@@ -181,7 +175,6 @@ const GempaTerkini = () => {
           </div>
         </div>
       )}
-      </motion.div>
     </>
   );
 };
