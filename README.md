@@ -81,6 +81,8 @@ Project ini tentunya tidak lepas dari berbagai pihak yang telah membantu, oleh k
 - [ ] Create Documentation for API public
 - [ ] Create API KEY generator
 - [x] build PWA
+- [ ] implement FCM
+- [ ] clean code
 
 ## Latest Issue
 - [x] Rest API Error
