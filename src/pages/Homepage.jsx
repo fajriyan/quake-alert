@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import Magnitudo from "../components/Magnitudo";
-import useGT, { useBMKGsummary, useGD, useGMBKGFeel } from "../features/fetch";
+import useGT, {
+  useBMKGsummary,
+  useGD,
+  useGMBKGFeel,
+  useGMBKGTerkini,
+} from "../features/fetch";
 import { motion } from "framer-motion";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
@@ -12,9 +17,9 @@ import Chart from "../components/Chart";
 const Homepage = () => {
   const { data: GT, isLoading: loadGT } = useBMKGsummary();
   const { data: GD, isLoading: loadGD } = useGMBKGFeel();
+  const { data: latestEQ, isLoading: loadingLatestEQ } = useGMBKGTerkini();
 
-
-  console.log(GT)
+  console.log(GT);
   const driverObj = driver({
     popoverClass: "driverjs-theme",
     showProgress: true,
@@ -79,7 +84,7 @@ const Homepage = () => {
           <div className="grid px-3 grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-3 ">
             {/* Start - Image Section  */}
             <div className="">
-              <div className="md:sticky md:top-[70px] p-1 rounded-lg border overflow-hidden flex justify-center bg-white">
+              <div className="p-1 rounded-lg border overflow-hidden flex justify-center bg-white">
                 <a
                   href={"https://data.bmkg.go.id/DataMKG/TEWS/" + GT?.Shakemap}
                   target="_blank"
@@ -252,7 +257,14 @@ const Homepage = () => {
                 </div>
 
                 <ul className="text-sm list-disc pl-5">
-                <div className="text-sm border border-slate-700 mb-4 rounded-md px-3 w-max">Terjadi Gempa : {dayjs(dayjs(GT?.Tanggal, "DD MMM YYYY").format("YYYY-MM-DD")+"T"+ GT?.Jam?.replace("WIB", "").trim()).fromNow()}</div>
+                  <div className="text-sm border border-slate-700 mb-4 rounded-md px-3 w-max">
+                    Terjadi Gempa :{" "}
+                    {dayjs(
+                      dayjs(GT?.Tanggal, "DD MMM YYYY").format("YYYY-MM-DD") +
+                        "T" +
+                        GT?.Jam?.replace("WIB", "").trim()
+                    ).fromNow()}
+                  </div>
                   <li>
                     <span className="flex gap-1 capitalize">
                       Dirasakan : <Skeleton width={"w-40"} />
@@ -392,10 +404,20 @@ const Homepage = () => {
                     )}
                   </tbody>
                 </table>
-              </div>              
+              </div>
             </div>
 
             {/* End - Information Section  */}
+          </div>
+        </div>
+        <div className="container mx-auto px-5 lg:px-0 flex flex-col md:flex-row mt-20 gap-10">
+          <div className="md:w-[50%] border p-7 border-slate-200 rounded-lg dark:bg-gradient-to-r from-gray-800 via-gray-800 to-slate-800">
+            <h2 className="mb-4 font-semibold text-lg text-slate-800 dark:text-white">Data Grafik Gempa Terkini</h2>
+            <Chart dataProps={latestEQ} />
+          </div>
+          <div className="md:w-[50%] border p-7 border-slate-200 rounded-lg dark:bg-gradient-to-r from-gray-800 via-gray-800 to-slate-800">
+            <h2 className="mb-4 font-semibold text-lg text-slate-800 dark:text-white">Data Grafik Gempa yang Dirasakan</h2>
+            <Chart dataProps={GD} />
           </div>
         </div>
       </div>
