@@ -13,13 +13,14 @@ import Navbar from "../components/Navbar";
 import textProcessing from "../lib/textProcessing";
 import dayjs from "../lib/dayjsConfig";
 import Chart from "../components/Chart";
+import Maps from "../components/Maps";
+import { useState } from "react";
 
 const Homepage = () => {
   const { data: GT, isLoading: loadGT } = useBMKGsummary();
   const { data: GD, isLoading: loadGD } = useGMBKGFeel();
   const { data: latestEQ, isLoading: loadingLatestEQ } = useGMBKGTerkini();
 
-  console.log(GT);
   const driverObj = driver({
     popoverClass: "driverjs-theme",
     showProgress: true,
@@ -75,8 +76,15 @@ const Homepage = () => {
     }
   };
 
+  console.log(GD);
+
   return (
     <>
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      />
+
       <div className="selection:bg-violet-200 selection:text-black min-h-screen dark:bg-gradient-to-r from-gray-800 via-gray-900 to-black pb-10">
         <Navbar />
         <div className="container mx-auto pt-5">
@@ -410,14 +418,23 @@ const Homepage = () => {
             {/* End - Information Section  */}
           </div>
         </div>
+
+        <div className="container mx-auto px-5 lg:px-0 mt-14 rounded-xl overflow-hidden relative z-0">
+          <Maps data={GD} />
+        </div>
+
         <div className="container mx-auto px-5 lg:px-0 flex flex-col md:flex-row mt-20 gap-10">
           <div className="md:w-[50%] border p-7 border-slate-200 rounded-lg dark:bg-gradient-to-r from-gray-800 via-gray-800 to-slate-800">
-            <h2 className="mb-4 font-semibold text-lg text-slate-800 dark:text-white">Data Grafik Gempa Terkini</h2>
-            <Chart dataProps={latestEQ} />
+            <h2 className="mb-4 font-semibold text-lg text-slate-800 dark:text-white">
+              Data Grafik Gempa yang Dirasakan
+            </h2>
+            <Chart dataProps={GD} />
           </div>
           <div className="md:w-[50%] border p-7 border-slate-200 rounded-lg dark:bg-gradient-to-r from-gray-800 via-gray-800 to-slate-800">
-            <h2 className="mb-4 font-semibold text-lg text-slate-800 dark:text-white">Data Grafik Gempa yang Dirasakan</h2>
-            <Chart dataProps={GD} />
+            <h2 className="mb-4 font-semibold text-lg text-slate-800 dark:text-white">
+              Data Grafik Gempa Terkini
+            </h2>
+            <Chart dataProps={latestEQ} />
           </div>
         </div>
       </div>

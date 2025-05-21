@@ -1,4 +1,3 @@
-import React from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,8 +9,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useGD } from "../features/fetch";
-import dayjs from "dayjs";
 
 ChartJS.register(
   CategoryScale,
@@ -24,17 +21,13 @@ ChartJS.register(
 );
 
 const Chart = ({ dataProps }) => {
-  const labels = dataProps
-    ?.reverse()
-    ?.map((item) =>
-      dayjs(
-        `${item.Tanggal} ${item.Jam.replace(" WIB", "")}`,
-        "DD MMM YYYY HH:mm:ss"
-      ).format("HH:mm")
-    );
-  const magnitudes = dataProps
-    ?.reverse()
-    ?.map((item) => parseFloat(item.Magnitude));
+  if (!Array.isArray(dataProps) || dataProps.length === 0) {
+    return <p>Loading data chart...</p>;
+  }
+
+  const reversedData = [...dataProps].reverse();
+  const labels = reversedData.map((item) => `${item.Jam}`);
+  const magnitudes = reversedData.map((item) => parseFloat(item?.Magnitude));
 
   const data = {
     labels,
@@ -60,12 +53,8 @@ const Chart = ({ dataProps }) => {
         callbacks: {
           label: function (tooltipItem) {
             const index = tooltipItem.dataIndex;
-            const item = dataProps.slice().reverse()[index]; // Ambil item asli setelah dibalik
-            const formattedDate = dayjs(
-              `${item.Tanggal} ${item.Jam.replace(" WIB", "")}`,
-              "DD MMM YYYY HH:mm:ss"
-            ).format("DD MMM YYYY HH:mm");
-            return `Magnitude: ${item.Magnitude} | ${formattedDate}`;
+            const item = reversedData[index];
+            return `Magnitude: ${item.Magnitude} | Kedalaman : ${item.Kedalaman} | ${item.Tanggal}-  ${item.Jam}`;
           },
         },
       },
