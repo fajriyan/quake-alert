@@ -15,6 +15,7 @@ import dayjs from "../lib/dayjsConfig";
 import Chart from "../components/Chart";
 import Maps from "../components/Maps";
 import { useState } from "react";
+import GeolocationInformation from "../components/GeolocationInformation";
 
 const Homepage = () => {
   const { data: GT, isLoading: loadGT } = useBMKGsummary();
@@ -419,6 +420,9 @@ const Homepage = () => {
           </div>
         </div>
 
+        <div className="container mx-auto px-5 lg:px-0 mt-14 rounded-xl overflow-hidden relative z-0">
+          <GeolocationInformation />
+        </div>
         <div className="container mx-auto px-5 lg:px-0 mt-14 rounded-xl overflow-hidden relative z-0">
           <Maps data={GD} />
         </div>
