@@ -6,6 +6,7 @@ import textProcessing from "../lib/textProcessing";
 import dayjs from "../lib/dayjsConfig";
 import Chart from "../components/Chart";
 import { useState } from "react";
+import { getRelativeTime } from "../lib/dateUtils";
 
 const GempaDirasakan = () => {
   const { data: GD, isLoading: loadGD } = useGMBKGFeel();
@@ -51,6 +52,7 @@ const GempaDirasakan = () => {
     link.click();
     document.body.removeChild(link);
   };
+
 
   return (
     <>
@@ -130,13 +132,7 @@ const GempaDirasakan = () => {
                           <span>{GDM?.Tanggal}</span> - {GDM?.Jam}
                         </p>
                         <p className="text-xs">
-                          {dayjs(
-                            dayjs(GDM?.Tanggal, "DD MMM YYYY").format(
-                              "YYYY-MM-DD"
-                            ) +
-                              "T" +
-                              GDM?.Jam.replace("WIB", "").trim()
-                          ).fromNow()}
+                          {getRelativeTime(GDM?.Tanggal, GDM?.Jam)}
                         </p>
                       </td>
                       <td className="p-2 group-hover:bg-slate-50 dark:group-hover:text-slate-900 dark:group-hover:bg-slate-200 border-r">

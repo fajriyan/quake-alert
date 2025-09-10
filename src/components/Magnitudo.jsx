@@ -1,6 +1,6 @@
 function Magnitudo({ mgFill }) {
   try {
-    if (mgFill <= 5.0) {
+    if (mgFill <= 5) {
       return (
         <>
           <svg

@@ -6,6 +6,7 @@ import textProcessing from "../lib/textProcessing";
 import dayjs from "../lib/dayjsConfig";
 import { useState } from "react";
 import Chart from "../components/Chart";
+import { getRelativeTime } from "../lib/dateUtils";
 
 const GempaTerkini = () => {
   const { data: GD, isLoading: loadGD } = useGMBKGTerkini();
@@ -135,13 +136,7 @@ const GempaTerkini = () => {
                           <span>{GDM?.Tanggal}</span> - {GDM?.Jam}
                         </p>
                         <p className="text-xs">
-                          {dayjs(
-                            dayjs(GDM?.Tanggal, "DD MMM YYYY").format(
-                              "YYYY-MM-DD"
-                            ) +
-                              "T" +
-                              GDM?.Jam.replace("WIB", "").trim()
-                          ).fromNow()}
+                          {getRelativeTime(GDM?.Tanggal, GDM?.Jam)}
                         </p>
                       </td>
                       <td className="p-2 group-hover:bg-slate-50 dark:group-hover:text-slate-900 dark:group-hover:bg-slate-200 border-r">

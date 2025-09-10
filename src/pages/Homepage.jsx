@@ -11,11 +11,11 @@ import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 import Navbar from "../components/Navbar";
 import textProcessing from "../lib/textProcessing";
-import dayjs from "../lib/dayjsConfig";
 import Chart from "../components/Chart";
 import Maps from "../components/Maps";
-import { useState } from "react";
 import GeolocationInformation from "../components/GeolocationInformation";
+import EarthquakeList from "../components/EarthquakeList";
+import { getRelativeTime } from "../lib/dateUtils";
 
 const Homepage = () => {
   const { data: GT, isLoading: loadGT } = useBMKGsummary();
@@ -77,8 +77,6 @@ const Homepage = () => {
     }
   };
 
-  console.log(GD);
-
   return (
     <>
       <link
@@ -88,6 +86,7 @@ const Homepage = () => {
 
       <div className="selection:bg-violet-200 selection:text-black min-h-screen dark:bg-gradient-to-r from-gray-800 via-gray-900 to-black pb-10">
         <Navbar />
+        <br />
         <div className="container mx-auto pt-5">
           <h1 className="hidden">Aplikasi Data Gempa Bumi BMKG | Gempa</h1>
           <div className="grid px-3 grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-3 ">
@@ -266,13 +265,13 @@ const Homepage = () => {
                 </div>
 
                 <ul className="text-sm list-disc pl-5">
-                  <div className="text-sm border border-slate-700 mb-4 rounded-md px-3 w-max">
-                    Terjadi Gempa :{" "}
-                    {dayjs(
-                      dayjs(GT?.Tanggal, "DD MMM YYYY").format("YYYY-MM-DD") +
-                        "T" +
-                        GT?.Jam?.replace("WIB", "").trim()
-                    ).fromNow()}
+                  <div className="text-sm border border-slate-700 mb-4 rounded-full pl-1 pr-3 w-max flex gap-1 items-center">
+                    <div
+                      className={`w-4 h-4 rounded-full  ${
+                        GT?.Magnitude <= 5 ? "bg-yellow-600" : "bg-red-700"
+                      } animate-pulse`}
+                    ></div>
+                    Terjadi Gempa : {getRelativeTime(GT?.Tanggal, GT?.Jam)}
                   </div>
                   <li>
                     <span className="flex gap-1 capitalize">
@@ -419,14 +418,12 @@ const Homepage = () => {
             {/* End - Information Section  */}
           </div>
         </div>
-
         <div className="container mx-auto px-5 lg:px-0 mt-14 rounded-xl overflow-hidden relative z-0">
           <GeolocationInformation />
         </div>
         <div className="container mx-auto px-5 lg:px-0 mt-14 rounded-xl overflow-hidden relative z-0">
           <Maps data={GD} />
         </div>
-
         <div className="container mx-auto px-5 lg:px-0 flex flex-col md:flex-row mt-20 gap-10">
           <div className="md:w-[50%] border p-7 border-slate-200 rounded-lg dark:bg-gradient-to-r from-gray-800 via-gray-800 to-slate-800">
             <h2 className="mb-4 font-semibold text-lg text-slate-800 dark:text-white">
@@ -440,6 +437,12 @@ const Homepage = () => {
             </h2>
             <Chart dataProps={latestEQ} />
           </div>
+        </div>
+        <div className="container mx-auto px-5 lg:px-0 mt-20 gap-10">
+          <h2 className="mb-5 text-xl font-semibold">
+            Data Kejadian Bencana Global{" "}
+          </h2>
+          <EarthquakeList />
         </div>
       </div>
     </>
