@@ -63,43 +63,53 @@ const EarthquakeTableCache = () => {
     fetchEarthquakes();
   }, []);
 
-  if (loading) return <p>Loading data gempa...</p>;
+  if (loading) return <p>Loading Data Bencana Global...</p>;
   if (error) return <p>{error}</p>;
   if (earthquakes.length === 0) return <p>Tidak ada data gempa saat ini.</p>;
 
   return (
     <div className="">
-      <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-300">
-          <thead className="bg-gray-100">
+      <div className="overflow-x-auto border border-slate-300 rounded-lg">
+        <table className="min-w-full  rounded-lg overflow-hidden shadow-sm text-sm ">
+          <thead className="bg-gray-50 text-gray-700">
             <tr>
-              <th className="border px-4 py-2 text-left">Judul</th>
-              <th className="border px-4 py-2 text-left">Tanggal</th>
-              <th className="border px-4 py-2 text-left">Koordinat</th>
-              <th className="border px-4 py-2 text-left">Sumber</th>
-              <th className="border px-4 py-2 text-left">Link Detail</th>
+              <th className="border-b px-4 py-2 text-left font-medium">
+                Judul
+              </th>
+              <th className="border-b px-4 py-2 text-left font-medium">
+                Tanggal
+              </th>
+              <th className="border-b px-4 py-2 text-left font-medium">
+                Koordinat
+              </th>
+              <th className="border-b px-4 py-2 text-left font-medium">
+                Sumber
+              </th>
+              <th className="border-b px-4 py-2 text-left font-medium">
+                Link Detail
+              </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-gray-200">
             {earthquakes.map((eq) => (
-              <tr key={eq.id} className="hover:bg-gray-50">
-                <td className="border px-4 py-2">{eq.title}</td>
-                <td className="border px-4 py-2">
+              <tr key={eq.id} className="hover:bg-gray-50 transition">
+                <td className="px-4 py-2 text-gray-800">{eq.title}</td>
+                <td className="px-4 py-2 text-gray-600">
                   {new Date(eq.geometry[0].date).toLocaleString()}
                 </td>
-                <td className="border px-4 py-2">
+                <td className="px-4 py-2 text-gray-600">
                   Lat {eq.geometry[0].coordinates[1]}, Lon{" "}
                   {eq.geometry[0].coordinates[0]}
                 </td>
-                <td className="border px-4 py-2">
+                <td className="px-4 py-2 text-gray-600">
                   {eq.sources.map((s) => s.id).join(", ")}
                 </td>
-                <td className="border px-4 py-2">
+                <td className="px-4 py-2">
                   <a
                     href={eq.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline"
+                    className="text-blue-600 hover:underline font-medium"
                   >
                     Detail
                   </a>

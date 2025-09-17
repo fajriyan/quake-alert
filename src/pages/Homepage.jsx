@@ -419,24 +419,24 @@ const Homepage = () => {
           </div>
         </div>
         <div className="container mx-auto px-5 lg:px-0 mt-14 rounded-xl overflow-hidden relative z-0">
-          <GeolocationInformation />
-        </div>
-        <div className="container mx-auto px-5 lg:px-0 mt-14 rounded-xl overflow-hidden relative z-0">
           <Maps data={GD} />
         </div>
-        <div className="container mx-auto px-5 lg:px-0 flex flex-col md:flex-row mt-20 gap-10">
-          <div className="md:w-[50%] border p-7 border-slate-200 rounded-lg dark:bg-gradient-to-r from-gray-800 via-gray-800 to-slate-800">
+        <div className="container mx-auto px-5 lg:px-0 flex flex-col lg:flex-row mt-20 gap-10">
+          <div className="lg:w-[50%] border p-7 border-slate-200 rounded-lg dark:bg-gradient-to-r from-gray-800 via-gray-800 to-slate-800">
             <h2 className="mb-4 font-semibold text-lg text-slate-800 dark:text-white">
               Data Grafik Gempa yang Dirasakan
             </h2>
             <Chart dataProps={GD} />
           </div>
-          <div className="md:w-[50%] border p-7 border-slate-200 rounded-lg dark:bg-gradient-to-r from-gray-800 via-gray-800 to-slate-800">
+          <div className="lg:w-[50%] border p-7 border-slate-200 rounded-lg dark:bg-gradient-to-r from-gray-800 via-gray-800 to-slate-800">
             <h2 className="mb-4 font-semibold text-lg text-slate-800 dark:text-white">
               Data Grafik Gempa Terkini
             </h2>
             <Chart dataProps={latestEQ} />
           </div>
+        </div>
+        <div className="container mx-auto px-5 lg:px-0 mt-14 relative z-0">
+          <GeolocationInformation />
         </div>
         <div className="container mx-auto px-5 lg:px-0 mt-20 gap-10">
           <h2 className="mb-5 text-xl font-semibold">

@@ -5,12 +5,74 @@
     <meta name="theme-color" content="#ddd6fe" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Data Gempa Indonesia Terbaru | QA</title>
     <meta
       name="description"
-      content="Layanan ini menyediakan Data Gempa Bumi Terbaru di Indonesia yang berasal dari Data Terbuka BMKG"
+      content="Ringkasan gempa bumi terkini di Indonesia. Data bersumber resmi dari BMKG, lengkap dengan lokasi, magnitudo, waktu kejadian, dan detail tambahan."
     />
-    <title>Data Gempa Indonesia | QA</title>
-    <meta name="description" content="Website Ringkasan terkait Gempa Bumi yang terjadi di Indonesia, data yang didapat bersumber dari BMKG">
+    <meta
+      name="keywords"
+      content="gempa Indonesia, gempa bumi BMKG, data gempa terbaru"
+    />
+    <meta name="author" content="QA" />
+
+    <!-- 🔹 Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Data Gempa Indonesia Terbaru | QA" />
+    <meta
+      property="og:description"
+      content="Informasi gempa bumi terkini dari BMKG. Data real-time dengan detail lokasi, magnitudo, dan waktu kejadian."
+    />
+    <meta property="og:url" content="https://example.com/" />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/fajriyan/info-gempa/90f658ab8dcb69f7cc2ebd628ab8fb13d05b6a32/public/favicon.svg"
+    />
+
+    <!-- 🔹 Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Data Gempa Indonesia Terbaru | QA" />
+    <meta
+      name="twitter:description"
+      content="Pantau informasi gempa bumi terbaru di Indonesia, bersumber dari BMKG."
+    />
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/fajriyan/info-gempa/90f658ab8dcb69f7cc2ebd628ab8fb13d05b6a32/public/favicon.svg"
+    />
+
+    <!-- 🔹 Structured Data JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "Data Gempa Indonesia",
+        "description": "Ringkasan gempa bumi terkini di Indonesia bersumber dari BMKG, lengkap dengan magnitudo, lokasi, dan waktu kejadian.",
+        "url": "https://gempa.pages.dev/",
+        "creator": {
+          "@type": "Organization",
+          "name": "BMKG",
+          "url": "https://www.bmkg.go.id/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "QA",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://raw.githubusercontent.com/fajriyan/info-gempa/90f658ab8dcb69f7cc2ebd628ab8fb13d05b6a32/public/favicon.svg"
+          }
+        },
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "distribution": {
+          "@type": "DataDownload",
+          "encodingFormat": "JSON",
+          "contentUrl": "https://data.bmkg.go.id/gempa/"
+        },
+        "keywords": ["gempa Indonesia", "BMKG", "gempa bumi", "data gempa"]
+      }
+    </script>
+
     <link rel="canonical" href="https://gempa.pages.dev/" />
     <meta
       name="google-site-verification"
@@ -20,6 +82,10 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script type="text/javascript" src="https://gempa.pages.dev/package/widgetdisabilitas.js" api-key-resvoice="bzbTAKXD"></script>
+    <script
+      type="text/javascript"
+      src="https://gempa.pages.dev/package/widgetdisabilitas.js"
+      api-key-resvoice="bzbTAKXD"
+    ></script>
   </body>
 </html>
