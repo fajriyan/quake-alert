@@ -89,9 +89,9 @@ const Homepage = () => {
         <br />
         <div className="container mx-auto pt-5">
           <h1 className="hidden">Aplikasi Data Gempa Bumi BMKG | Gempa</h1>
-          <div className="grid px-3 grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-3 ">
+          <div className="flex flex-col xl:flex-row px-3 gap-3 ">
             {/* Start - Image Section  */}
-            <div className="">
+            <div className="xl:w-[25%]">
               <div className="p-1 rounded-lg border overflow-hidden flex justify-center bg-white">
                 <a
                   href={"https://data.bmkg.go.id/DataMKG/TEWS/" + GT?.Shakemap}
@@ -151,7 +151,7 @@ const Homepage = () => {
             {/* End - Image Section  */}
 
             {/* Start - Information Section */}
-            <div className="lg:col-span-3">
+            <div className="xl:w-[75%]">
               <div
                 className="rounded-lg border p-3 flex flex-wrap items-center gap-[6px] dark:text-neutral-100 dark:bg-gray-400/15 dark:backdrop-blur-md"
                 id="highligt"
@@ -420,20 +420,6 @@ const Homepage = () => {
         </div>
         <div className="container mx-auto px-5 lg:px-0 mt-14 rounded-xl overflow-hidden relative z-0">
           <Maps data={GD} />
-        </div>
-        <div className="container mx-auto px-5 lg:px-0 flex flex-col lg:flex-row mt-20 gap-10">
-          <div className="lg:w-[50%] border p-7 border-slate-200 rounded-lg dark:bg-gradient-to-r from-gray-800 via-gray-800 to-slate-800">
-            <h2 className="mb-4 font-semibold text-lg text-slate-800 dark:text-white">
-              Data Grafik Gempa yang Dirasakan
-            </h2>
-            <Chart dataProps={GD} />
-          </div>
-          <div className="lg:w-[50%] border p-7 border-slate-200 rounded-lg dark:bg-gradient-to-r from-gray-800 via-gray-800 to-slate-800">
-            <h2 className="mb-4 font-semibold text-lg text-slate-800 dark:text-white">
-              Data Grafik Gempa Terkini
-            </h2>
-            <Chart dataProps={latestEQ} />
-          </div>
         </div>
         <div className="container mx-auto px-5 lg:px-0 mt-14 relative z-0">
           <GeolocationInformation />

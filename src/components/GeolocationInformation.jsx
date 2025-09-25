@@ -107,16 +107,12 @@ const GeolocationInformation = () => {
 
           {astro && (
             <div className="mt-6 space-y-6">
-              <h3 className="text-sm font-semibold text-slate-700">
-                Informasi Astronomi
-              </h3>
-
               {/* 📌 Umum */}
               <div>
                 <h4 className="text-xs font-semibold text-slate-500 mb-2">
                   📌 Umum
                 </h4>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs text-slate-700">
+                <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3 text-xs text-slate-700">
                   <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">📍 Lokasi</p>
                     <p>
@@ -153,7 +149,7 @@ const GeolocationInformation = () => {
                 <h4 className="text-xs font-semibold text-slate-500 mb-2">
                   ☀️ Matahari
                 </h4>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs text-slate-700">
+                <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3 text-xs text-slate-700">
                   <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🌅 Sunrise</p>
                     <p>{astro.sunrise}</p>
@@ -182,7 +178,7 @@ const GeolocationInformation = () => {
                 <h4 className="text-xs font-semibold text-slate-500 mb-2">
                   🌙 Bulan
                 </h4>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs text-slate-700">
+                <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3 text-xs text-slate-700">
                   <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🌙 Moonrise</p>
                     <p>{astro.moonrise}</p>
@@ -271,7 +267,7 @@ const GeolocationInformation = () => {
                             </div>
                             <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
                               <div
-                                className="h-2 rounded-full bg-slate-300"
+                                className="h-2 rounded-full bg-violet-800"
                                 style={{ width: `${sunPct}%` }}
                                 aria-hidden
                               />
@@ -285,7 +281,7 @@ const GeolocationInformation = () => {
                             </div>
                             <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
                               <div
-                                className="h-2 rounded-full bg-slate-300"
+                                className="h-2 rounded-full bg-violet-800"
                                 style={{ width: `${moonPct}%` }}
                                 aria-hidden
                               />
@@ -332,7 +328,7 @@ const GeolocationInformation = () => {
                               <span className="mr-2">☀️</span>
                               <div className="flex-1 bg-slate-100 h-2 rounded-full overflow-hidden">
                                 <div
-                                  className="h-2 rounded-full bg-slate-300"
+                                  className="h-2 rounded-full bg-violet-800"
                                   style={{ width: `${sunPct}%` }}
                                 />
                               </div>
@@ -345,7 +341,7 @@ const GeolocationInformation = () => {
                               <span className="mr-2">🌙</span>
                               <div className="flex-1 bg-slate-100 h-2 rounded-full overflow-hidden">
                                 <div
-                                  className="h-2 rounded-full bg-slate-300"
+                                  className="h-2 rounded-full bg-violet-800"
                                   style={{ width: `${moonPct}%` }}
                                 />
                               </div>
@@ -393,7 +389,7 @@ const GeolocationInformation = () => {
                             <div className="w-8 text-xs text-slate-600">☀️</div>
                             <div className="flex-1 bg-slate-100 h-2 rounded-full overflow-hidden">
                               <div
-                                className="h-2 rounded-full bg-slate-300"
+                                className="h-2 rounded-full bg-violet-800"
                                 style={{ width: `${sunPct}%` }}
                               />
                             </div>
@@ -406,7 +402,7 @@ const GeolocationInformation = () => {
                             <div className="w-8 text-xs text-slate-600">🌙</div>
                             <div className="flex-1 bg-slate-100 h-2 rounded-full overflow-hidden">
                               <div
-                                className="h-2 rounded-full bg-slate-300"
+                                className="h-2 rounded-full bg-violet-800"
                                 style={{ width: `${moonPct}%` }}
                               />
                             </div>
@@ -450,7 +446,7 @@ const GeolocationInformation = () => {
                     <div className="mt-3">
                       <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
                         <div
-                          className="h-3 rounded-full bg-slate-300"
+                          className="h-3 rounded-full bg-violet-800"
                           style={{
                             width: `${Math.max(
                               0,

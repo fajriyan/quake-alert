@@ -85,9 +85,6 @@ const EarthquakeTableCache = () => {
               <th className="border-b px-4 py-2 text-left font-medium">
                 Sumber
               </th>
-              <th className="border-b px-4 py-2 text-left font-medium">
-                Link Detail
-              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -103,16 +100,6 @@ const EarthquakeTableCache = () => {
                 </td>
                 <td className="px-4 py-2 text-gray-600">
                   {eq.sources.map((s) => s.id).join(", ")}
-                </td>
-                <td className="px-4 py-2">
-                  <a
-                    href={eq.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline font-medium"
-                  >
-                    Detail
-                  </a>
                 </td>
               </tr>
             ))}

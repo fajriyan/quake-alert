@@ -11,6 +11,8 @@ import { getRelativeTime } from "../lib/dateUtils";
 const GempaDirasakan = () => {
   const { data: GD, isLoading: loadGD } = useGMBKGFeel();
   const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const exportToCSV = () => {
     if (!GD || GD.length === 0) return;
 
@@ -37,9 +39,7 @@ const GempaDirasakan = () => {
 
     const csvContent =
       "data:text/csv;charset=utf-8," +
-      [header, ...rows]
-        .map((e) => e.map((v) => `"${v}"`).join(",")) // wrap dengan " dan gabung dengan koma
-        .join("\n");
+      [header, ...rows].map((e) => e.map((v) => `"${v}"`).join(",")).join("\n");
 
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
@@ -53,6 +53,23 @@ const GempaDirasakan = () => {
     document.body.removeChild(link);
   };
 
+  const exportToJSON = () => {
+    if (!GD || GD.length === 0) return;
+
+    const jsonContent =
+      "data:application/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify(GD, null, 2));
+
+    const link = document.createElement("a");
+    link.setAttribute("href", jsonContent);
+    link.setAttribute(
+      "download",
+      `data-gempa-${dayjs().format("YYYY-MM-DD")}.json`
+    );
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <>
@@ -73,12 +90,38 @@ const GempaDirasakan = () => {
             >
               Buka Grafik
             </button>
-            <button
-              onClick={exportToCSV}
-              className="px-3 py-1.5 text-xs font-semibold border border-purple-900 hover:bg-purple-950 text-slate-700 rounded-md hover:text-white"
-            >
-              Export CSV
-            </button>
+
+            <div className="relative inline-block text-left">
+              <button
+                onClick={() => setOpen(!open)}
+                className="px-3 py-1.5 text-xs font-semibold border border-purple-900 hover:bg-purple-950 text-slate-700 rounded-md hover:text-white"
+              >
+                Export Data
+              </button>
+
+              {open && (
+                <div className="absolute right-0 mt-1 w-36 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                  <button
+                    onClick={() => {
+                      exportToCSV();
+                      setOpen(false);
+                    }}
+                    className="w-full text-left px-3 py-1.5 text-xs hover:bg-gray-100"
+                  >
+                    Export as CSV
+                  </button>
+                  <button
+                    onClick={() => {
+                      exportToJSON();
+                      setOpen(false);
+                    }}
+                    className="w-full text-left px-3 py-1.5 text-xs hover:bg-gray-100"
+                  >
+                    Export as JSON
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="mt-5 overflow-x-scroll md:overflow-visible border border-slate-200 ">
