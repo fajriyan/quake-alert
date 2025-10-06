@@ -18,7 +18,6 @@ const Navbar = () => {
   const [theme, setTheme] = useContext(ThemeContext);
   let storageTheme = JSON.parse(localStorage.getItem("theme"));
 
-  
   useEffect(() => {
     if (storageTheme === null) {
       setTheme("light");
@@ -82,9 +81,7 @@ const Navbar = () => {
         } bg-white z-[97] `}
       >
         <div className="pt-[75px] px-3 flex flex-col gap-5">
-          <NavLink to={'/'}>
-           Beranda
-          </NavLink>
+          <NavLink to={"/"}>Beranda</NavLink>
 
           {mainMenu.map((m) => (
             <NavLink
@@ -100,7 +97,7 @@ const Navbar = () => {
             </NavLink>
           ))}
 
-          <Weather/>
+          <Weather />
         </div>
       </div>
 
@@ -168,8 +165,6 @@ const Navbar = () => {
               )}
             </div>
 
-
-            
             {theme == "dark" ? (
               <button onClick={handleTheme}>
                 <svg
@@ -197,8 +192,10 @@ const Navbar = () => {
               </button>
             )}
 
-          
-            <div className="p-1 flex flex-col items-center w-[70px] border-x px-10 ml-1" id="time-is">
+            <div
+              className="p-1 flex flex-col items-center w-[70px] border-x px-10 ml-1"
+              id="time-is"
+            >
               <p className="font-medium">
                 <Time showTime={true} />
               </p>
@@ -207,7 +204,7 @@ const Navbar = () => {
               </p>
             </div>
             <div className="hidden md:block">
-            <Weather/>
+              <Weather />
             </div>
             {/* <div className="flex grow ">
               {online ? (

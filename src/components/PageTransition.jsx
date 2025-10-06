@@ -5,7 +5,7 @@ const PageTransition = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), 1000); // Durasi preload
+    const timeout = setTimeout(() => setLoading(false), 700); // Durasi preload
     return () => clearTimeout(timeout);
   }, []);
 

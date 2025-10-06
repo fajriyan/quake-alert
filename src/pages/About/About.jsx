@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
-import 'dayjs/locale/id';
-import relativeTime from 'dayjs/plugin/relativeTime';
+import "dayjs/locale/id";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const About = () => {
   dayjs.extend(relativeTime);
-  dayjs.locale('id');
+  dayjs.locale("id");
 
   const dates = [
     "2024-11-18T10:00:00Z", // Tanggal dalam format ISO
@@ -172,10 +172,24 @@ const About = () => {
           <div className="mt-7">
             <h2 className="font-semibold text-lg">Hubungi Kami</h2>
             <div className="mt-2 flex gap-2">
-
-              <a className="px-1 py-0.5 hover:bg-slate-900 hover:text-white rounded-md border border-slate-800" href="https://github.com/fajriyan">Github</a>
-              <a className="px-1 py-0.5 hover:bg-slate-900 hover:text-white rounded-md border border-slate-800" href="https://www.linkedin.com/in/fajriyan/">LinkedIn</a>
-              <a className="px-1 py-0.5 hover:bg-slate-900 hover:text-white rounded-md border border-slate-800" href="https://www.instagram.com/fajriyan.nur/">Instagram</a>
+              <a
+                className="px-1 py-0.5 hover:bg-slate-900 hover:text-white rounded-md border border-slate-800"
+                href="https://github.com/fajriyan"
+              >
+                Github
+              </a>
+              <a
+                className="px-1 py-0.5 hover:bg-slate-900 hover:text-white rounded-md border border-slate-800"
+                href="https://www.linkedin.com/in/fajriyan/"
+              >
+                LinkedIn
+              </a>
+              <a
+                className="px-1 py-0.5 hover:bg-slate-900 hover:text-white rounded-md border border-slate-800"
+                href="https://www.instagram.com/fajriyan.nur/"
+              >
+                Instagram
+              </a>
             </div>
           </div>
         </div>
