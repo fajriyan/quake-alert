@@ -18,7 +18,6 @@ function App() {
     <ThemeContext.Provider value={theme}>
       <Navbar />
       <AnimatePresence mode="wait">
-        {/* PageTransition hanya satu kali di sini */}
         <PageTransition key={location.pathname}>
           <Routes location={location}>
             <Route path="/" element={<Home />} />

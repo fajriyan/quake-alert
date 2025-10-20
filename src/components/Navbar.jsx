@@ -11,8 +11,9 @@ const Navbar = () => {
   const [menuMobile, setMenuMobile] = useState(false);
   const currentRoute = useLocation();
   const mainMenu = [
-    { id: 1, title: "Gempa Dirasakan", url: "/gempa-dirasakan" },
-    { id: 2, title: "Gempa Terkini", url: "/gempa-terkini" },
+    { id: 1, title: "Ringkasan", url: "/" },
+    { id: 2, title: "Gempa Dirasakan", url: "/gempa-dirasakan" },
+    { id: 3, title: "Gempa Terkini", url: "/gempa-terkini" },
   ];
 
   const [theme, setTheme] = useContext(ThemeContext);
@@ -81,7 +82,6 @@ const Navbar = () => {
         } bg-white z-[97] `}
       >
         <div className="pt-[75px] px-3 flex flex-col gap-5">
-          <NavLink to={"/"}>Beranda</NavLink>
 
           {mainMenu.map((m) => (
             <NavLink
@@ -101,14 +101,14 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="border-b sticky dark:bg-neutral-950/50 dark:text-white bg-white top-0 z-[99]">
+      <div className="border-b sticky dark:bg-neutral-950/50 dark:text-white bg-white/80 backdrop-blur-md top-0 z-[99]">
         <div className="container h-[60px] mx-auto flex items-center justify-between px-3">
           <Link to={"/"}>
             <img
               src="https://raw.githubusercontent.com/fajriyan/info-gempa/90f658ab8dcb69f7cc2ebd628ab8fb13d05b6a32/public/favicon.svg"
               // className="w-9 hover:scale-110"
               className={
-                currentRoute.pathname === "/"
+                currentRoute.pathname === "/404"
                   ? "w-9 hover:scale-110 border-b pb-1 border-purple-500"
                   : "w-9 hover:scale-110"
               }

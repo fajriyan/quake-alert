@@ -66,7 +66,7 @@ const FeelView = ({
               </div>
             </div>
 
-            <div className="mt-5 overflow-x-scroll md:overflow-visible border border-slate-200 ">
+            <div className="mt-5 overflow-x-scroll border border-slate-200 ">
               <table className="min-w-full divide-y divide-gray-200 text-sm dark:bg-gray-400/15 dark:backdrop-blur-md">
                 <thead className="text-left sticky border-b text-gray-900 dark:text-neutral-100">
                   <tr>
