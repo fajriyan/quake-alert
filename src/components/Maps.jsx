@@ -10,7 +10,7 @@ const Maps = ({ data }) => {
       // style={{ height: "500px", width: "100%" }}
     >
       <TileLayer
-        attribution='&copy; <a href="https://osm.org">OpenStreetMap</a> contributors'
+        attribution='Data Gempa'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {Array.isArray(data) &&

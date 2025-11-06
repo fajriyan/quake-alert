@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useGMBKGTerkini } from "../../features/fetch";
 import dayjs from "../../lib/dayjsConfig";
 import LatestView from "./LatestView";
+import { useGMBKGTerkini } from "../../lib/api";
 
 const Latest = () => {
   const { data: GD, isLoading: loadGD } = useGMBKGTerkini();

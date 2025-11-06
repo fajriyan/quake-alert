@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useGMBKGFeel } from "../../features/fetch";
 import dayjs from "../../lib/dayjsConfig";
 import FeelView from "./FeelView";
+import { useGMBKGFeel } from "../../lib/api";
 
 const Feel = () => {
   const { data: GD, isLoading: loadGD } = useGMBKGFeel();

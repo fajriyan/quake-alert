@@ -1,6 +1,6 @@
 import { driver } from "driver.js";
-import { useBMKGsummary, useGMBKGFeel } from "../../features/fetch";
 import HomeView from "./HomeView";
+import { useBMKGsummary, useGMBKGFeel } from "../../lib/api";
 
 const Home = () => {
   const { data: GT, isLoading: loadGT } = useBMKGsummary();
