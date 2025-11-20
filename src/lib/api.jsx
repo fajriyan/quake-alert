@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 export const useBMKGsummary = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryFn: async () => {
       const response = await fetch(
         "https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json"
@@ -17,10 +17,11 @@ export const useBMKGsummary = () => {
   return {
     data: data?.Infogempa?.gempa || [],
     isLoading,
+    refetch,
   };
 };
 export const useGMBKGTerkini = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryFn: async () => {
       const response = await fetch(
         "https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json"
@@ -36,11 +37,12 @@ export const useGMBKGTerkini = () => {
   return {
     data: data?.Infogempa?.gempa || [],
     isLoading,
+    refetch,
   };
 };
 
 export const useGMBKGFeel = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryFn: async () => {
       const response = await fetch(
         "https://data.bmkg.go.id/DataMKG/TEWS/gempadirasakan.json"
@@ -56,5 +58,6 @@ export const useGMBKGFeel = () => {
   return {
     data: data?.Infogempa?.gempa || [],
     isLoading,
+    refetch,
   };
 };

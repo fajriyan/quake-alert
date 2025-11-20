@@ -2,9 +2,10 @@ import { useState } from "react";
 import dayjs from "../../lib/dayjsConfig";
 import FeelView from "./FeelView";
 import { useGMBKGFeel } from "../../lib/api";
+import AutoRefreshToggle from "../../components/AutoRefreshToggle";
 
 const Feel = () => {
-  const { data: GD, isLoading: loadGD } = useGMBKGFeel();
+  const { data: GD, isLoading: loadGD, refetch: reGD } = useGMBKGFeel();
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -77,6 +78,12 @@ const Feel = () => {
         open={open}
         setIsOpen={setIsOpen}
         setOpen={setOpen}
+      />
+      <AutoRefreshToggle
+        interval={2000}
+        onRefresh={async () => {
+          await reGD();
+        }}
       />
     </div>
   );

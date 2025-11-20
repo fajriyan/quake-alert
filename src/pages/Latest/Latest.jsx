@@ -2,9 +2,10 @@ import { useState } from "react";
 import dayjs from "../../lib/dayjsConfig";
 import LatestView from "./LatestView";
 import { useGMBKGTerkini } from "../../lib/api";
+import AutoRefreshToggle from "../../components/AutoRefreshToggle";
 
 const Latest = () => {
-  const { data: GD, isLoading: loadGD } = useGMBKGTerkini();
+  const { data: GD, isLoading: loadGD, refetch: reGD } = useGMBKGTerkini();
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -77,6 +78,12 @@ const Latest = () => {
         setIsOpen={setIsOpen}
         setOpen={setOpen}
         open={open}
+      />
+      <AutoRefreshToggle
+        interval={2000}
+        onRefresh={async () => {
+          await reGD();
+        }}
       />
     </div>
   );

@@ -1,10 +1,11 @@
 import { driver } from "driver.js";
 import HomeView from "./HomeView";
 import { useBMKGsummary, useGMBKGFeel } from "../../lib/api";
+import AutoRefreshToggle from "../../components/AutoRefreshToggle";
 
 const Home = () => {
-  const { data: GT, isLoading: loadGT } = useBMKGsummary();
-  const { data: GD, isLoading: loadGD } = useGMBKGFeel();
+  const { data: GT, isLoading: loadGT, refetch: reGT } = useBMKGsummary();
+  const { data: GD, isLoading: loadGD, refetch: reDG } = useGMBKGFeel();
 
   const driverObj = driver({
     popoverClass: "driverjs-theme",
@@ -49,6 +50,13 @@ const Home = () => {
         driverObj={driverObj}
         loadGD={loadGD}
         loadGT={loadGT}
+      />
+      <AutoRefreshToggle
+        interval={2000}
+        onRefresh={async () => {
+          await reGT();
+          await reDG();
+        }}
       />
     </div>
   );
