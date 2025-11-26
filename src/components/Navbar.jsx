@@ -75,14 +75,12 @@ const Navbar = () => {
   return (
     <>
       {/* Start - Navbar  */}
-
       <div
         className={`md:hidden absolute w-full overflow-hidden duration-700 ${
           menuMobile ? "h-full" : "h-0"
         } bg-white z-[97] `}
       >
         <div className="pt-[75px] px-3 flex flex-col gap-5">
-
           {mainMenu.map((m) => (
             <NavLink
               key={Math.random(9)}
@@ -101,7 +99,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="border-b sticky dark:bg-neutral-950/50 dark:text-white bg-white/80 backdrop-blur-md top-0 z-[99]">
+      <div className="border-b dark:border-b-gray-900 sticky dark:text-white bg-white/80 dark:bg-gray-900/90 backdrop-blur-md top-0 z-[99]">
         <div className="container h-[60px] mx-auto flex items-center justify-between px-3">
           <Link to={"/"}>
             <img

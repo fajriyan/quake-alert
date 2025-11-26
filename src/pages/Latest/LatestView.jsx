@@ -16,7 +16,7 @@ const LatestView = ({
   try {
     return (
       <>
-        <div className="dark:bg-gradient-to-r min-h-screen from-gray-800 via-gray-900 to-black mb-16">
+        <div className="dark:bg-gradient-to-r min-h-screen from-gray-800 via-gray-900 to-black pb-20">
           <div className="container mx-auto py-2 px-3 md:px-0">
             <h1 className="font-bold text-xl text-slate-700 dark:text-neutral-100">
               Data Gempa Terkini

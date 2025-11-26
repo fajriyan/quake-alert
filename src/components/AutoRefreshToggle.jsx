@@ -1,15 +1,42 @@
 import { useEffect, useState } from "react";
 
-const AutoRefreshToggle = ({ interval = 25000, onRefresh }) => {
+const STORAGE_KEY = "auto_refresh_toggle";
+const EXPIRY_MS = 30 * 24 * 60 * 60 * 1000; // 1 bulan
+
+const AutoRefreshToggle = ({ interval = 30000, onRefresh }) => {
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    if (!enabled) return;
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
 
-    const timer = setInterval(() => {
-      if (typeof onRefresh === "function") {
-        onRefresh();
+    try {
+      const saved = JSON.parse(raw);
+
+      if (saved.enabled && saved.expiry > Date.now()) {
+        setEnabled(true);
+      } else {
+        localStorage.removeItem(STORAGE_KEY); // expired
       }
+    } catch {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        enabled,
+        expiry: Date.now() + EXPIRY_MS,
+      })
+    );
+  }, [enabled]);
+
+  useEffect(() => {
+    if (!enabled) return;
+    const timer = setInterval(() => {
+      if (typeof onRefresh === "function") onRefresh();
     }, interval);
 
     return () => clearInterval(timer);
