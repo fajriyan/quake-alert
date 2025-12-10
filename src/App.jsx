@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import ThemeContext from "./lib/ThemeContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "./components/PageTransition";
 import Home from "./pages/Home/Home";
@@ -13,6 +13,10 @@ import Navbar from "./components/Navbar";
 function App() {
   const theme = useState("light");
   const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
 
   return (
     <ThemeContext.Provider value={theme}>

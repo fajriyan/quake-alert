@@ -80,6 +80,10 @@ var replacementSources = [
   ["suhumenurun", "suhu menurun"],
   ["berkabut", "berkabut"],
   ["udaraLembap", "udara lembap"],
+  ["halmaherabarat", "Halmahera Barat"],
+  ["halmaheratimur", "Halmahera Timur"],
+  ["niasselatan", "nias selatan"],
+  ["serambagiantimur", "serambagian timur"],
 
   // Bentuk jamak dan kecil lainnya
   ["danlainnya", "dan lainnya"],
@@ -91,21 +95,19 @@ var replacementSources = [
   ["sktr", "sekitar"],
 ];
 
-const textProcessing = (originalText, lower) => {
-  replacementSources.forEach(function (replacement) {
-    var searchText = replacement[0];
-    var replacementText = replacement[1];
-    originalText = originalText?.replace(
-      new RegExp(searchText, "g"),
-      replacementText
+const textProcessing = (originalText) => {
+  if (!originalText) return "";
+
+  originalText = originalText.toLowerCase();
+
+  replacementSources.forEach(([search, replacement]) => {
+    originalText = originalText.replace(
+      new RegExp(search.toLowerCase(), "g"),
+      replacement
     );
   });
 
-  if (!lower) {
-    return originalText?.toLowerCase();
-  } else {
-    return originalText?.toLowerCase();
-  }
+  return originalText;
 };
 
 export default textProcessing;
