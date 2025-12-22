@@ -82,7 +82,7 @@ const GeolocationInformation = () => {
   }, [lat, lon]);
 
   return (
-    <div className="p-4 text-sm rounded-md space-y-4 w-full border border-slate-200 overflow-hidden">
+    <div className="p-4 text-sm rounded-md space-y-4 w-full border border-slate-200 dark:border-gray-600 overflow-hidden">
       {error ? (
         <div className="text-red-500 text-xs">
           <p>{error}</p>
@@ -98,8 +98,8 @@ const GeolocationInformation = () => {
                   className="w-[50px]"
                 />
                 <div>
-                  <p className="font-semibold text-lg">{data?.main?.temp}°C</p>
-                  <p className="text-xs">{data?.name}</p>
+                  <p className="font-semibold text-lg dark:text-white">{data?.main?.temp}°C</p>
+                  <p className="text-xs dark:text-white">{data?.name}</p>
                 </div>
               </div>
             )}
@@ -113,31 +113,31 @@ const GeolocationInformation = () => {
                   📌 Umum
                 </h4>
                 <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3 text-xs text-slate-700">
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">📍 Lokasi</p>
                     <p>
                       {astro.location?.latitude}, {astro.location?.longitude}
                     </p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🗓️ Tanggal</p>
                     <p>{astro.date}</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🕒 Waktu</p>
                     <p>{astro.current_time}</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🕒 Panjang Hari</p>
                     <p>{astro.day_length}</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">📏 Jarak Matahari</p>
                     <p>
                       {Number(astro.sun_distance / 1000000).toFixed(0)} juta km
                     </p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">📏 Jarak Bulan</p>
                     <p>{Number(astro.moon_distance).toFixed(0)} km</p>
                   </div>
@@ -150,23 +150,23 @@ const GeolocationInformation = () => {
                   ☀️ Matahari
                 </h4>
                 <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3 text-xs text-slate-700">
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🌅 Sunrise</p>
                     <p>{astro.sunrise}</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🌇 Sunset</p>
                     <p>{astro.sunset}</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🌞 Solar Noon</p>
                     <p>{astro.solar_noon}</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">☀️ Sun Altitude</p>
                     <p>{astro.sun_altitude.toFixed(2)}°</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">☀️ Sun Azimuth</p>
                     <p>{astro.sun_azimuth.toFixed(2)}°</p>
                   </div>
@@ -179,27 +179,27 @@ const GeolocationInformation = () => {
                   🌙 Bulan
                 </h4>
                 <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3 text-xs text-slate-700">
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🌙 Moonrise</p>
                     <p>{astro.moonrise}</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🌘 Moonset</p>
                     <p>{astro.moonset}</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🌔 Fase Bulan</p>
                     <p>{astro.moon_phase}</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">💡 Cahaya Bulan</p>
                     <p>{astro.moon_illumination_percentage}%</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🌙 Moon Altitude</p>
                     <p>{astro.moon_altitude.toFixed(2)}°</p>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm">
+                  <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-3 shadow-sm">
                     <p className="font-medium">🌙 Moon Azimuth</p>
                     <p>{astro.moon_azimuth.toFixed(2)}°</p>
                   </div>
@@ -212,10 +212,10 @@ const GeolocationInformation = () => {
             {/* helper calculations (inline di JSX) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Distance card */}
-              <div className="bg-slate-50 rounded-xl p-4 shadow-sm border border-slate-100">
+              <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-4 shadow-sm border border-slate-100">
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-xs text-slate-500 font-medium">
+                    <p className="text-xs text-slate-500 dark:text-white font-medium">
                       📏 Jarak
                     </p>
                     <p className="text-sm text-slate-800 font-semibold mt-1">
@@ -229,7 +229,7 @@ const GeolocationInformation = () => {
                         ? `${Number(astro.moon_distance).toLocaleString()} km`
                         : "—"}
                     </p>
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-xs text-slate-500 dark:text-white mt-1">
                       Skala (log) untuk perbandingan visual
                     </p>
                   </div>
@@ -259,9 +259,9 @@ const GeolocationInformation = () => {
 
                         return (
                           <div className="space-y-2">
-                            <div className="text-xs text-slate-500 flex items-center justify-between">
+                            <div className="text-xs text-slate-500 dark:text-white flex items-center justify-between">
                               <span>☀️ Matahari</span>
-                              <span className="font-medium text-slate-700">
+                              <span className="font-medium text-slate-700  dark:text-white">
                                 {sunPct}%
                               </span>
                             </div>
@@ -273,9 +273,9 @@ const GeolocationInformation = () => {
                               />
                             </div>
 
-                            <div className="text-xs text-slate-500 flex items-center justify-between mt-2">
+                            <div className="text-xs text-slate-500 dark:text-white flex items-center justify-between mt-2">
                               <span>🌙 Bulan</span>
-                              <span className="font-medium text-slate-700">
+                              <span className="font-medium text-slate-700 dark:text-white">
                                 {moonPct}%
                               </span>
                             </div>
@@ -294,20 +294,20 @@ const GeolocationInformation = () => {
               </div>
 
               {/* Altitude card */}
-              <div className="bg-slate-50 rounded-xl p-4 shadow-sm border border-slate-100">
-                <p className="text-xs text-slate-500 font-medium">
+              <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-4 shadow-sm border border-slate-100">
+                <p className="text-xs text-slate-500 dark:text-white font-medium">
                   🧭 Altitude
                 </p>
                 <div className="mt-2 flex items-center justify-between gap-3">
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-slate-600">
+                      <span className="text-xs text-slate-600 dark:text-white">
                         ☀️{" "}
                         {astro?.sun_altitude
                           ? `${astro.sun_altitude.toFixed(2)}°`
                           : "—"}
                       </span>
-                      <span className="text-xs text-slate-600">
+                      <span className="text-xs text-slate-600 dark:text-white">
                         🌙{" "}
                         {astro?.moon_altitude
                           ? `${astro.moon_altitude.toFixed(2)}°`
@@ -324,7 +324,7 @@ const GeolocationInformation = () => {
                         const moonPct = mapAlt(astro.moon_altitude);
                         return (
                           <div className="mt-2 space-y-2">
-                            <div className="text-xs text-slate-500 flex items-center justify-between">
+                            <div className="text-xs text-slate-500 dark:text-white flex items-center justify-between">
                               <span className="mr-2">☀️</span>
                               <div className="flex-1 bg-slate-100 h-2 rounded-full overflow-hidden">
                                 <div
@@ -332,7 +332,7 @@ const GeolocationInformation = () => {
                                   style={{ width: `${sunPct}%` }}
                                 />
                               </div>
-                              <span className="ml-3 w-10 text-right text-xs text-slate-600">
+                              <span className="ml-3 w-10 text-right text-xs text-slate-600 dark:text-white">
                                 {sunPct}%
                               </span>
                             </div>
@@ -345,7 +345,7 @@ const GeolocationInformation = () => {
                                   style={{ width: `${moonPct}%` }}
                                 />
                               </div>
-                              <span className="ml-3 w-10 text-right text-xs text-slate-600">
+                              <span className="ml-3 w-10 text-right text-xs text-slate-600 dark:text-white">
                                 {moonPct}%
                               </span>
                             </div>
@@ -357,10 +357,10 @@ const GeolocationInformation = () => {
               </div>
 
               {/* Azimuth card */}
-              <div className="bg-slate-50 rounded-xl p-4 shadow-sm border border-slate-100">
-                <p className="text-xs text-slate-500 font-medium">🧭 Azimuth</p>
+              <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-4 shadow-sm border border-slate-100">
+                <p className="text-xs text-slate-500 dark:text-white font-medium">🧭 Azimuth</p>
                 <div className="mt-2">
-                  <div className="flex items-center justify-between text-xs text-slate-600">
+                  <div className="flex items-center justify-between text-xs text-slate-600 dark:text-white">
                     <span>
                       ☀️{" "}
                       {astro?.sun_azimuth
@@ -393,7 +393,7 @@ const GeolocationInformation = () => {
                                 style={{ width: `${sunPct}%` }}
                               />
                             </div>
-                            <div className="w-10 text-right text-xs text-slate-600">
+                            <div className="w-10 text-right text-xs text-slate-600 dark:text-white">
                               {sunPct}%
                             </div>
                           </div>
@@ -406,7 +406,7 @@ const GeolocationInformation = () => {
                                 style={{ width: `${moonPct}%` }}
                               />
                             </div>
-                            <div className="w-10 text-right text-xs text-slate-600">
+                            <div className="w-10 text-right text-xs text-slate-600 dark:text-white">
                               {moonPct}%
                             </div>
                           </div>
@@ -417,17 +417,17 @@ const GeolocationInformation = () => {
               </div>
 
               {/* Phase / Illumination card */}
-              <div className="bg-slate-50 rounded-xl p-4 shadow-sm border border-slate-100">
-                <p className="text-xs text-slate-500 font-medium">
+              <div className="bg-slate-50 dark:bg-slate-800 dark:text-white dark:border dark:border-gray-700 rounded-xl p-4 shadow-sm border border-slate-100">
+                <p className="text-xs text-slate-500 dark:text-white font-medium">
                   🌗 Fase & Illumination
                 </p>
                 <div className="mt-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-slate-800 font-semibold">
+                      <p className="text-sm text-slate-800 dark:text-white font-semibold">
                         {astro?.moon_phase ?? "—"}
                       </p>
-                      <p className="text-xs text-slate-500 mt-1">Fase Bulan</p>
+                      <p className="text-xs text-slate-500 dark:text-white mt-1">Fase Bulan</p>
                     </div>
                     <div className="text-right">
                       <p className="text-sm text-slate-800 font-semibold">
@@ -435,7 +435,7 @@ const GeolocationInformation = () => {
                           ? `${astro.moon_illumination_percentage}%`
                           : "—"}
                       </p>
-                      <p className="text-xs text-slate-500 mt-1">
+                      <p className="text-xs text-slate-500 dark:text-white mt-1">
                         Illumination
                       </p>
                     </div>
@@ -455,7 +455,7 @@ const GeolocationInformation = () => {
                           }}
                         />
                       </div>
-                      <div className="text-xs text-slate-500 mt-2">
+                      <div className="text-xs text-slate-500 dark:text-white mt-2">
                         Lebih tinggi berarti bulan lebih terang
                       </div>
                     </div>

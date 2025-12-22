@@ -9,3 +9,13 @@ html {
 .circle_aksesbilitas_popup {
   scale: 0.6;
 }
+
+@layer base {
+  html {
+    @apply bg-white dark:bg-gray-900;
+  }
+
+  body {
+    @apply bg-white dark:bg-gray-900;
+  }
+}

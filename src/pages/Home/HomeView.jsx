@@ -105,7 +105,7 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
               {/* Start - Information Section */}
               <div className="xl:w-[75%]">
                 <div
-                  className="rounded-lg border p-3 flex flex-wrap items-center gap-[6px] dark:text-neutral-100 dark:bg-gray-400/15 dark:backdrop-blur-md"
+                  className="rounded-lg border dark:border-gray-600 p-3 flex flex-wrap items-center gap-[6px] dark:text-neutral-100 dark:bg-gray-400/15 dark:backdrop-blur-md"
                   id="highligt"
                 >
                   <div className="w-[32%] md:w-[16%] flex items-center flex-col">
@@ -213,11 +213,11 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
                   </div>
 
                   <div className="w-full my-2">
-                    <hr />
+                   <hr className="border-gray-200 dark:border-gray-600" />
                   </div>
 
                   <ul className="text-sm list-disc pl-5">
-                    <div className="text-sm border border-slate-700 mb-4 rounded-full pl-1 pr-3 w-max flex gap-1 items-center">
+                    <div className="text-sm border dark:border-gray-600 border-slate-700 mb-4 rounded-full pl-1 pr-3 w-max flex gap-1 items-center">
                       <div
                         className={`w-4 h-4 rounded-full  ${
                           GT?.Magnitude <= 5 ? "bg-yellow-600" : "bg-red-700"
@@ -247,16 +247,16 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
                 </div>
 
                 <div
-                  className="mt-3 rounded-lg border p- overflow-x-scroll  dark:bg-gray-400/15 dark:backdrop-blur-md"
+                  className="mt-3 rounded-lg border dark:border-gray-600 overflow-x-scroll  dark:bg-gray-400/15 dark:backdrop-blur-md"
                   id="table-feel"
                 >
-                  <div className="border-b px-3 py-2 sticky top-0 dark:text-neutral-100">
+                  <div className="border-b dark:border-gray-600 px-3 py-2 sticky top-0 dark:text-neutral-100">
                     <h2 className="font-semibold text-sm text-gray-900 dark:text-neutral-100">
                       #4 Data Gempa Terbaru Yang Dirasakan
                     </h2>
                   </div>
                   <table className="min-w-full divide-y divide-gray-200 text-sm">
-                    <thead className="text-left sticky top-[37px] border-b text-slate-900 dark:text-neutral-100">
+                    <thead className="text-left sticky top-[37px] border-b dark:border-gray-600 text-slate-900 dark:text-neutral-100">
                       <tr>
                         <th className="whitespace-nowrap px-4 py-2 font-medium">
                           Waktu Gempa
@@ -278,7 +278,7 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-200">
+                    <tbody className="divide-y divide-gray-200 divide-gray-600">
                       {loadGD ? (
                         <tr>
                           <td className="">
