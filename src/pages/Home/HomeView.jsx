@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Magnitudo from "../../components/Magnitudo";
 import { getRelativeTime } from "../../lib/dateUtils";
 import textProcessing from "../../lib/textProcessing";
+import EducationPage from "../../components/EducationPage";
 
 const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
   const Skeleton = ({ width }) => {
@@ -213,7 +214,7 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
                   </div>
 
                   <div className="w-full my-2">
-                   <hr className="border-gray-200 dark:border-gray-600" />
+                    <hr className="border-gray-200 dark:border-gray-600" />
                   </div>
 
                   <ul className="text-sm list-disc pl-5">
@@ -375,6 +376,9 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
           </div>
           <div className="container mx-auto px-5 lg:px-0 mt-14 relative z-0">
             <GeolocationInformation />
+          </div>
+          <div className="mt-10 px-5 lg:px-0">
+            <EducationPage />
           </div>
         </div>
       </>
