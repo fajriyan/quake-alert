@@ -2,6 +2,7 @@ import Chart from "../../components/Chart";
 import Magnitudo from "../../components/Magnitudo";
 import { getRelativeTime } from "../../lib/dateUtils";
 import textProcessing from "../../lib/textProcessing";
+import GempaPerTanggalChart from "../../components/GempaPerTanggalChart";
 
 const FeelView = ({
   setIsOpen,
@@ -63,6 +64,18 @@ const FeelView = ({
                     </button>
                   </div>
                 )}
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-5 pt-10">
+              <div className="md:w-[50%]">
+                <GempaPerTanggalChart data={GD} />
+              </div>
+              <div className="md:w-[50%] border rounded-md p-5">
+                <h2 className="text-lg font-semibold mb-4">
+                  Grafik Magnitudo 
+                </h2>
+                <Chart dataProps={GD} />
               </div>
             </div>
 

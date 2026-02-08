@@ -67,6 +67,8 @@ const Feel = () => {
     document.body.removeChild(link);
   };
 
+  console.log(GD)
+
   return (
     <div className="">
       <FeelView
