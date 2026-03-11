@@ -45,7 +45,7 @@ export default function GempaPerTanggalChart({ data = [] }) {
 
           borderWidth: 1,
           borderRadius: 6,
-          barThickness: 80,
+          barThickness: 45,
         },
       ],
     };
