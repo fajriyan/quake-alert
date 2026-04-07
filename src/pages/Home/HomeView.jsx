@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import GeolocationInformation from "../../components/GeolocationInformation";
 import { Link } from "react-router-dom";
 import Magnitudo from "../../components/Magnitudo";
+import NotificationToggle from "../../components/NotificationToggle";
 import { getRelativeTime } from "../../lib/dateUtils";
 import textProcessing from "../../lib/textProcessing";
 import EducationPage from "../../components/EducationPage";
@@ -98,6 +99,9 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
                     >
                       Tentang Website
                     </Link>
+                  </div>
+                  <div className="mt-3">
+                    <NotificationToggle latestEvent={GT} />
                   </div>
                 </motion.div>
               </div>
