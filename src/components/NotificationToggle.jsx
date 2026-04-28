@@ -123,10 +123,6 @@ const NotificationToggle = ({ latestEvent, minMagnitude = 5 }) => {
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-sm font-semibold">Notifikasi Gempa</p>
-          <p className="text-xs text-slate-500 dark:text-slate-300">
-            Dapatkan notifikasi ketika gempa baru terdeteksi dengan magnitude ≥{" "}
-            {minMagnitude}.
-          </p>
         </div>
         <button
           onClick={toggleNotifications}

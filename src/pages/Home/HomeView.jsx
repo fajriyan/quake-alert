@@ -257,7 +257,7 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
                 >
                   <div className="border-b dark:border-gray-600 px-3 py-2 sticky top-0 dark:text-neutral-100">
                     <h2 className="font-semibold text-sm text-gray-900 dark:text-neutral-100">
-                      #4 Data Gempa Terbaru Yang Dirasakan
+                      #6 Data Gempa Terbaru Yang Dirasakan
                     </h2>
                   </div>
                   <table className="min-w-full divide-y divide-gray-200 text-sm">
@@ -306,7 +306,7 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
                           </td>
                         </tr>
                       ) : (
-                        GD?.slice(0, 4).map((GDM) => (
+                        GD?.slice(0, 6).map((GDM) => (
                           <tr
                             className="group text-slate-700 dark:text-neutral-100"
                             key={GDM?.DateTime + GDM?.Bujur + GDM?.Lintang}
