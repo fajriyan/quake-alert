@@ -83,6 +83,7 @@ Project ini tentunya tidak lepas dari berbagai pihak yang telah membantu, oleh k
 - [x] build PWA
 - [ ] implement FCM
 - [ ] clean code
+- [ ] fix issue security
 
 ## Latest Issue
 - [x] Rest API Error
