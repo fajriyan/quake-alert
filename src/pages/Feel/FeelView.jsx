@@ -233,8 +233,8 @@ const FeelView = ({
         )}
       </>
     );
-  } catch (error) {
-    console.log(error);
+  } catch {
+    return null;
   }
 };
 

@@ -239,8 +239,8 @@ const LatestView = ({
         )}
       </>
     );
-  } catch (error) {
-    console.log(error);
+  } catch {
+    return null;
   }
 };
 

@@ -8,11 +8,6 @@ const About = () => {
   dayjs.extend(relativeTime);
   dayjs.locale("id");
 
-  const dates = [
-    "2024-11-18T10:00:00Z", 
-    "2024-11-15T12:30:00Z",
-    "2024-11-01T08:00:00Z",
-  ];
   return (
     <motion.div
       initial={{ x: 70 }}

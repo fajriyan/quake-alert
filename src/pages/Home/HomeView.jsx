@@ -21,11 +21,10 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
             ></div>
           </div>
         );
-      } else {
-        null;
       }
-    } catch (e) {
-      console.log("Error in Skeleton" + e);
+      return null;
+    } catch {
+      return null;
     }
   };
 
@@ -387,8 +386,8 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
         </div>
       </>
     );
-  } catch (error) {
-    console.log(error);
+  } catch {
+    return null;
   }
 };
 

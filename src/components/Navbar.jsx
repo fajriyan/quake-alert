@@ -6,7 +6,6 @@ import Weather from "./Weather";
 
 const Navbar = () => {
   const root = window.document.documentElement;
-  const online = navigator.onLine;
 
   const [menuMobile, setMenuMobile] = useState(false);
   const currentRoute = useLocation();
@@ -41,8 +40,8 @@ const Navbar = () => {
         root.classList.remove("light");
         root.classList.add("dark");
       }
-    } catch (error) {
-      // console.log("Error on Set Theme");
+    } catch {
+      // ignore invalid theme state and fall back to default
     }
   }, [storageTheme?.theme]);
 
@@ -83,7 +82,7 @@ const Navbar = () => {
         <div className="pt-[75px] px-3 flex flex-col gap-5">
           {mainMenu.map((m) => (
             <NavLink
-              key={Math.random(9)}
+              key={m.id}
               to={m.url}
               className={
                 currentRoute.pathname === m.url
@@ -119,7 +118,7 @@ const Navbar = () => {
           <div className="md:flex gap-5 items-center hidden">
             {mainMenu.map((m) => (
               <NavLink
-                key={Math.random(9)}
+                key={m.id}
                 to={m.url}
                 className={
                   currentRoute.pathname === m.url

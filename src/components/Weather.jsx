@@ -56,9 +56,9 @@ const Weather = () => {
         <div className="text-red-500 text-xs">
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2C8.69 2 6 4.69 6 8C6 11.86 10.38 17.5 11.63 19.08C11.82 19.32 12.18 19.32 12.37 19.08C13.62 17.5 18 11.86 18 8C18 4.69 15.31 2 12 2Z" 
-                  stroke="red" stroke-width="2" fill="none"/>
-            <circle cx="12" cy="8" r="2" stroke="red" stroke-width="2" fill="none"/>
-            <path d="M4 4L20 20" stroke="red" stroke-width="2" stroke-linecap="round"/>
+                  stroke="red" strokeWidth="2" fill="none"/>
+            <circle cx="12" cy="8" r="2" stroke="red" strokeWidth="2" fill="none"/>
+            <path d="M4 4L20 20" stroke="red" strokeWidth="2" strokeLinecap="round"/>
           </svg>
 
           </div>

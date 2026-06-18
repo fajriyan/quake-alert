@@ -22,7 +22,7 @@ const NotificationToggle = ({ latestEvent, minMagnitude = 5 }) => {
       const parsed = JSON.parse(saved);
       setEnabled(parsed.enabled && parsed.permission === "granted");
       setPermission(parsed.permission || Notification?.permission || "default");
-    } catch (error) {
+    } catch {
       setEnabled(false);
       setPermission(Notification?.permission || "default");
     }
@@ -89,7 +89,7 @@ const NotificationToggle = ({ latestEvent, minMagnitude = 5 }) => {
       }
 
       return false;
-    } catch (error) {
+    } catch {
       setMessage("Terjadi kesalahan pada permintaan notifikasi.");
       return false;
     }
