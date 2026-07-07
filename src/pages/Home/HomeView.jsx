@@ -380,9 +380,6 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
           <div className="container mx-auto px-5 lg:px-0 mt-14 relative z-0">
             <GeolocationInformation />
           </div>
-          <div className="mt-10 px-5 lg:px-0">
-            <EducationPage />
-          </div>
         </div>
       </>
     );

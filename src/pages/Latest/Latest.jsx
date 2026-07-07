@@ -2,10 +2,7 @@ import { useState } from "react";
 import LatestView from "./LatestView";
 import { useGMBKGTerkini } from "../../lib/api";
 import AutoRefreshToggle from "../../components/AutoRefreshToggle";
-import {
-  exportRowsToCSV,
-  exportRowsToJSON,
-} from "../../lib/exportData";
+import { exportRowsToCSV, exportRowsToJSON } from "../../lib/exportData";
 
 const exportHeaders = [
   "Tanggal",
@@ -23,6 +20,8 @@ const Latest = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
+
+
   return (
     <div className="">
       <LatestView
@@ -39,7 +38,7 @@ const Latest = () => {
               g.Wilayah,
               g.Potensi,
             ]) || [],
-            exportHeaders
+            exportHeaders,
           )
         }
         exportToJSON={() => exportRowsToJSON(GD)}
