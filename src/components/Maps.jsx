@@ -168,7 +168,7 @@ const ZoomTracker = ({ onZoomChange }) => {
 
 const SmartLegend = ({ totalCount, clusterCount }) => {
   return (
-    <div className="absolute left-3 bottom-3 z-[500] max-w-[220px] rounded-xl border border-white/70 bg-white/95 p-3 text-xs text-slate-700 shadow-lg backdrop-blur dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-100">
+    <div className="absolute left-3 bottom-3 z-500 max-w-[220px] rounded-xl border border-white/70 bg-white/95 p-3 text-xs text-slate-700 shadow-lg backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-100">
       <div className="mb-2">
         <p className="text-sm font-semibold">Peta Gempa</p>
         <p className="mt-1 text-[11px] text-slate-500 dark:text-slate-300">

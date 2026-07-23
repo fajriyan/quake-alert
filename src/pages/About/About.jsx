@@ -15,7 +15,7 @@ const About = () => {
       transition={{ delay: 0 }}
       className="hidden-bars-y"
     >
-      <div className="dark:bg-gradient-to-r min-h-screen from-gray-800 via-gray-900 to-black">
+      <div className="dark:bg-linear-to-r min-h-screen from-gray-800 via-gray-900 to-black">
         <div className="">
           <img
             src="https://c.tenor.com/mndwWfr3sAYAAAAC/tenor.gif"

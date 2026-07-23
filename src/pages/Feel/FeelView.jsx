@@ -18,7 +18,7 @@ const FeelView = ({
   try {
     return (
       <>
-        <div className="dark:bg-gradient-to-r min-h-screen from-gray-800 via-gray-900 to-black pb-20 duration-500">
+        <div className="dark:bg-linear-to-r min-h-screen from-gray-800 via-gray-900 to-black pb-20 duration-500">
           <div className="container mx-auto py-2 px-3 md:px-0">
             <h1 className="font-bold text-xl text-slate-700 dark:text-neutral-100">
               Data Gempa yang Dirasakan
@@ -196,7 +196,7 @@ const FeelView = ({
                                   <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                                   <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                                 </svg>
-                                <span className="absolute bottom-9 left-0 scale-y-0 rounded bg-gray-800 px-2 py-1 text-xs text-white md:group-hover/coordinate:scale-y-100 ease-in duration-200 ">
+                                <span className="absolute bottom-9 left-0 scale-y-0 rounded-sm bg-gray-800 px-2 py-1 text-xs text-white md:group-hover/coordinate:scale-y-100 ease-in duration-200 ">
                                   Open in Maps
                                 </span>
                                 {GDM?.Coordinates}
@@ -225,7 +225,7 @@ const FeelView = ({
         </div>
 
         {isOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-[999]">
+          <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-999">
             <div className="bg-white p-6 rounded-lg shadow-lg w-[650px] animate-fade-in">
               <div className="flex justify-center h-[300px]">
                 <Chart dataProps={GD} />

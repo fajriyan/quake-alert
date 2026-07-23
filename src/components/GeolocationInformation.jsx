@@ -56,7 +56,7 @@ const InfoChip = ({ label, value }) => (
 
 const MetricCard = ({ label, value, note, tone = "from-violet-500 to-sky-500" }) => (
   <div className={statClassName}>
-    <div className={`h-1.5 w-12 rounded-full bg-gradient-to-r ${tone}`} />
+    <div className={`h-1.5 w-12 rounded-full bg-linear-to-r ${tone}`} />
     <p className="mt-3 text-[11px] uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
       {label}
     </p>
@@ -343,14 +343,14 @@ const GeolocationInformation = () => {
 
   return (
     <motion.section
-      className="w-full overflow-hidden rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white via-slate-50 to-sky-50 p-4 text-sm shadow-[0_20px_80px_-35px_rgba(15,23,42,0.35)] dark:border-slate-700/70 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
+      className="w-full overflow-hidden rounded-3xl border border-slate-200/80 bg-linear-to-br from-white via-slate-50 to-sky-50 p-4 text-sm shadow-[0_20px_80px_-35px_rgba(15,23,42,0.35)] dark:border-slate-700/70 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
       variants={containerVariants}
       initial="hidden"
       animate="show"
     >
       <motion.div
         variants={itemVariants}
-        className="mb-4 flex flex-col gap-3 rounded-3xl border border-slate-200/80 bg-white/80 p-4 shadow-sm backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-900/70"
+        className="mb-4 flex flex-col gap-3 rounded-3xl border border-slate-200/80 bg-white/80 p-4 shadow-xs backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-900/70"
       >
         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <div>
@@ -407,7 +407,7 @@ const GeolocationInformation = () => {
 
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-4">
-              <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-sky-100 to-indigo-100 shadow-inner dark:from-sky-950/60 dark:to-indigo-950/60">
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-linear-to-br from-sky-100 to-indigo-100 shadow-inner dark:from-sky-950/60 dark:to-indigo-950/60">
                 {loadingWeather || !data ? (
                   <div className="h-10 w-10 animate-pulse rounded-full bg-slate-300/70 dark:bg-slate-700/70" />
                 ) : (
@@ -620,13 +620,13 @@ const GeolocationInformation = () => {
                   label="Matahari"
                   value={distanceBars ? `${distanceBars.sun}%` : "—"}
                   percent={distanceBars?.sun ?? 0}
-                  accent="bg-gradient-to-r from-amber-500 to-orange-500"
+                  accent="bg-linear-to-r from-amber-500 to-orange-500"
                 />
                 <ProgressRow
                   label="Bulan"
                   value={distanceBars ? `${distanceBars.moon}%` : "—"}
                   percent={distanceBars?.moon ?? 0}
-                  accent="bg-gradient-to-r from-sky-500 to-violet-500"
+                  accent="bg-linear-to-r from-sky-500 to-violet-500"
                 />
               </div>
               <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
@@ -648,13 +648,13 @@ const GeolocationInformation = () => {
                   label="Matahari"
                   value={altitudeBars ? `${altitudeBars.sun}%` : "—"}
                   percent={altitudeBars?.sun ?? 0}
-                  accent="bg-gradient-to-r from-amber-500 to-yellow-400"
+                  accent="bg-linear-to-r from-amber-500 to-yellow-400"
                 />
                 <ProgressRow
                   label="Bulan"
                   value={altitudeBars ? `${altitudeBars.moon}%` : "—"}
                   percent={altitudeBars?.moon ?? 0}
-                  accent="bg-gradient-to-r from-sky-500 to-indigo-500"
+                  accent="bg-linear-to-r from-sky-500 to-indigo-500"
                 />
               </div>
             </div>
@@ -672,13 +672,13 @@ const GeolocationInformation = () => {
                   label="Matahari"
                   value={azimuthBars ? `${azimuthBars.sun}%` : "—"}
                   percent={azimuthBars?.sun ?? 0}
-                  accent="bg-gradient-to-r from-orange-500 to-rose-500"
+                  accent="bg-linear-to-r from-orange-500 to-rose-500"
                 />
                 <ProgressRow
                   label="Bulan"
                   value={azimuthBars ? `${azimuthBars.moon}%` : "—"}
                   percent={azimuthBars?.moon ?? 0}
-                  accent="bg-gradient-to-r from-indigo-500 to-fuchsia-500"
+                  accent="bg-linear-to-r from-indigo-500 to-fuchsia-500"
                 />
               </div>
             </div>

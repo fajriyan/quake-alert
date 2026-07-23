@@ -119,7 +119,7 @@ const NotificationToggle = ({ latestEvent, minMagnitude = 5 }) => {
   };
 
   return (
-    <div className="rounded-lg border dark:border-gray-600 p-3 bg-white dark:bg-gray-800/70 shadow-sm">
+    <div className="rounded-lg border dark:border-gray-600 p-3 bg-white dark:bg-gray-800/70 shadow-xs">
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-sm font-semibold">Notifikasi Gempa</p>

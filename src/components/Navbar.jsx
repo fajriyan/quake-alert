@@ -77,7 +77,7 @@ const Navbar = () => {
       <div
         className={`md:hidden absolute w-full overflow-hidden duration-700 ${
           menuMobile ? "h-full" : "h-0"
-        } bg-white z-[97] `}
+        } bg-white z-97 `}
       >
         <div className="pt-[75px] px-3 flex flex-col gap-5">
           {mainMenu.map((m) => (
@@ -98,7 +98,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="border-b dark:border-b-gray-900 sticky dark:text-white bg-white/80 dark:bg-gray-900/90 backdrop-blur-md top-0 z-[99]">
+      <div className="border-b dark:border-b-gray-900 sticky dark:text-white bg-white/80 dark:bg-gray-900/90 backdrop-blur-md top-0 z-99">
         <div className="container h-[60px] mx-auto flex items-center justify-between px-3">
           <Link to={"/"}>
             <img
@@ -196,7 +196,7 @@ const Navbar = () => {
               <p className="font-medium">
                 <Time showTime={true} />
               </p>
-              <p className="text-xs -mt-[6px]">
+              <p className="text-xs mt-[-6px]">
                 <Time showDate={true} />
               </p>
             </div>
