@@ -46,7 +46,7 @@ const FeelView = ({
                         </button>
 
                         {open && (
-                           <div className="absolute right-0 mt-1 w-36 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                           <div className="absolute right-0 mt-1 w-36 bg-white border border-gray-200 rounded-md z-10">
                               <button
                                  onClick={() => {
                                     exportToCSV();
@@ -268,7 +268,7 @@ const FeelView = ({
 
             {isOpen && (
                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-999">
-                  <div className="bg-white p-6 rounded-lg shadow-lg w-[650px] animate-fade-in">
+                  <div className="bg-white p-6 rounded-lg w-[650px] animate-fade-in">
                      <div className="flex justify-center h-[300px]">
                         <Chart dataProps={GD} />
                      </div>

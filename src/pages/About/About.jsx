@@ -65,7 +65,7 @@ const About = () => {
                      <div className="flex gap-3 items-center">
                         <Link
                            to="/"
-                           className="border border-slate-800 text-slate-900 rounded-md hover:bg-violet-100 px-3 py-1 font-medium dark:bg-neutral-300/90 dark:shadow-lg dark:hover:bg-white dark:hover:text-slate-900"
+                           className="border border-slate-800 text-slate-900 rounded-md hover:bg-violet-100 px-3 py-1 font-medium dark:bg-neutral-300/90 dark:hover:bg-white dark:hover:text-slate-900"
                         >
                            Kembali ke Beranda
                         </Link>

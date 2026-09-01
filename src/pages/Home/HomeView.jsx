@@ -90,14 +90,14 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
                         >
                            <div className="mt-2 flex gap-3">
                               <button
-                                 className=" bg-purple-900 w-full border border-purple-900 text-white  font-medium py-2 rounded-md hover:bg-violet-900 dark:bg-violet-800 dark:border-violet-800 dark:shadow-lg"
+                                 className=" bg-purple-900 w-full border border-purple-900 text-white  font-medium py-2 rounded-md hover:bg-violet-900 dark:bg-violet-800 dark:border-violet-800"
                                  onClick={() => driverObj.drive()}
                               >
                                  Mulai Website Tour
                               </button>
                               <Link
                                  to={"/tentang-website"}
-                                 className="border border-slate-800 w-full text-slate-900 dark:text-neutral-100 font-medium py-2 rounded-md text-center hover:bg-violet-200 dark:bg-neutral-300/40 dark:shadow-lg dark:hover:bg-white dark:hover:text-slate-900"
+                                 className="border border-slate-800 w-full text-slate-900 dark:text-neutral-100 font-medium py-2 rounded-md text-center hover:bg-violet-200 dark:bg-neutral-300/40 dark:hover:bg-white dark:hover:text-slate-900"
                               >
                                  Tentang Website
                               </Link>

@@ -275,7 +275,7 @@ const LatestView = ({
 
             {isOpen && (
                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-999">
-                  <div className="bg-white p-6 rounded-lg shadow-lg w-[650px] animate-fade-in">
+                  <div className="bg-white p-6 rounded-lg w-[650px] animate-fade-in">
                      <div className="flex justify-center h-[300px]">
                         <Chart dataProps={GD} />
                      </div>
