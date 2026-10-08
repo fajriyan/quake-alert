@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "test": "node src/lib/filterGempa.test.js",
     "preview": "vite preview"
   },
   "dependencies": {
