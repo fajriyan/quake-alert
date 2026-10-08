@@ -14,6 +14,7 @@ const browserGlobals = {
   setInterval: "readonly",
   clearInterval: "readonly",
   clearTimeout: "readonly",
+  URLSearchParams: "readonly",
   console: "readonly",
   location: "readonly",
 };

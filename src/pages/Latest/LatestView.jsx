@@ -5,6 +5,7 @@ import Chart from "../../components/Chart";
 import GempaPerTanggalChart from "../../components/GempaPerTanggalChart";
 import { getDepthTag } from "../../lib/getDepthTag";
 import HotspotCard from "../../components/HotspotCard";
+import FilterBar from "../../components/FilterBar";
 
 const LatestView = ({
    setIsOpen,
@@ -13,6 +14,7 @@ const LatestView = ({
    exportToJSON,
    loadGD,
    GD,
+   total,
    isOpen,
    open,
    hotspots,
@@ -29,6 +31,8 @@ const LatestView = ({
                      Pada halaman ini ditampilkan data Gempa Terkini di seluruh
                      Indonesia berdasarkan data BMKG Terbaru.
                   </p>
+
+                  <FilterBar total={total} shown={GD?.length ?? 0} />
 
                   <div className="mt-2 flex gap-3 items-center">
                      <button
@@ -119,6 +123,15 @@ const LatestView = ({
                                     </td>
                                     <td className="">{/* <Skeleton /> */}</td>
                                     <td className="">{/* <Skeleton /> */}</td>
+                                 </tr>
+                              ) : GD?.length === 0 ? (
+                                 <tr>
+                                    <td
+                                       colSpan={8}
+                                       className="px-4 py-6 text-center text-slate-500 dark:text-neutral-400"
+                                    >
+                                       Tidak ada data yang cocok dengan filter.
+                                    </td>
                                  </tr>
                               ) : (
                                  GD?.map((GDM, index) => {

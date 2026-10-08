@@ -5,6 +5,7 @@ import textProcessing from "../../lib/textProcessing";
 import GempaPerTanggalChart from "../../components/GempaPerTanggalChart";
 import { getDepthTag } from "../../lib/getDepthTag";
 import HotspotCard from "../../components/HotspotCard";
+import FilterBar from "../../components/FilterBar";
 
 const FeelView = ({
    setIsOpen,
@@ -14,6 +15,7 @@ const FeelView = ({
    exportToCSV,
    exportToJSON,
    GD,
+   total,
    loadGD,
    hotspots,
 }) => {
@@ -29,6 +31,9 @@ const FeelView = ({
                      Pada halaman ini ditampilkan data Gempa yang dirasakan oleh
                      masyarakat berdasarkan data BMKG Terbaru.
                   </p>
+
+                  <FilterBar total={total} shown={GD?.length ?? 0} />
+
                   <div className="mt-2 flex gap-3 items-center">
                      <button
                         onClick={() => setIsOpen(true)}
@@ -115,6 +120,15 @@ const FeelView = ({
                                     </td>
                                     <td className="">{/* <Skeleton /> */}</td>
                                     <td className="">{/* <Skeleton /> */}</td>
+                                 </tr>
+                              ) : GD?.length === 0 ? (
+                                 <tr>
+                                    <td
+                                       colSpan={7}
+                                       className="px-4 py-6 text-center text-slate-500 dark:text-neutral-400"
+                                    >
+                                       Tidak ada data yang cocok dengan filter.
+                                    </td>
                                  </tr>
                               ) : (
                                  GD?.map((GDM, index) => {

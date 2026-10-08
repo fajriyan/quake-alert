@@ -6,7 +6,6 @@ import Magnitudo from "../../components/Magnitudo";
 import NotificationToggle from "../../components/NotificationToggle";
 import { getRelativeTime } from "../../lib/dateUtils";
 import textProcessing from "../../lib/textProcessing";
-import EducationPage from "../../components/EducationPage";
 
 const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
    const Skeleton = ({ width }) => {

@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import FeelView from "./FeelView";
 import { useGMBKGFeel } from "../../lib/api";
 import AutoRefreshToggle from "../../components/AutoRefreshToggle";
 import { exportRowsToCSV, exportRowsToJSON } from "../../lib/exportData";
 import { buildHotspots } from "../../lib/hotspotCluster";
+import { filterGempa } from "../../lib/filterGempa";
 
 const exportHeaders = [
    "Tanggal",
@@ -20,16 +22,19 @@ const Feel = () => {
    const { data: GD, isLoading: loadGD, refetch: reGD } = useGMBKGFeel();
    const [isOpen, setIsOpen] = useState(false);
    const [open, setOpen] = useState(false);
+   const [params] = useSearchParams();
 
-   const hotspots = buildHotspots(GD, 30);
+   const rows = filterGempa(GD, params);
+   const hotspots = buildHotspots(rows, 30);
 
    return (
       <div className="">
          <FeelView
-            GD={GD}
+            GD={rows}
+            total={GD?.length ?? 0}
             exportToCSV={() =>
                exportRowsToCSV(
-                  GD?.map((g) => [
+                  rows.map((g) => [
                      g.Tanggal,
                      g.Jam,
                      g.Lintang,
@@ -42,7 +47,7 @@ const Feel = () => {
                   exportHeaders,
                )
             }
-            exportToJSON={() => exportRowsToJSON(GD)}
+            exportToJSON={() => exportRowsToJSON(rows)}
             isOpen={isOpen}
             loadGD={loadGD}
             open={open}
