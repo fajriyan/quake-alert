@@ -2,33 +2,31 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 
+const EASE = [0.16, 1, 0.3, 1];
+
 const containerVariants = {
-   hidden: { opacity: 0, y: 16 },
+   hidden: { opacity: 0, y: 12 },
    show: {
       opacity: 1,
       y: 0,
-      transition: {
-         staggerChildren: 0.08,
-         delayChildren: 0.05,
-      },
+      transition: { staggerChildren: 0.08, delayChildren: 0.05 },
    },
 };
 
 const itemVariants = {
-   hidden: { opacity: 0, y: 12, scale: 0.98 },
+   hidden: { opacity: 0, y: 12 },
    show: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: { type: "spring", stiffness: 180, damping: 22 },
+      transition: { duration: 0.6, ease: EASE },
    },
 };
 
 const cardClassName =
-   "rounded-3xl border border-slate-200/80 bg-white/90 p-4 dark:border-slate-700/60 dark:bg-slate-900/70";
+   "rounded-[12px] border border-line bg-surface p-6 transition-shadow duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)] md:p-8";
 
-const statClassName =
-   "rounded-2xl border border-slate-200/70 bg-slate-50/90 p-3 dark:border-slate-700/60 dark:bg-slate-800/70";
+const rowClassName =
+   "flex items-baseline justify-between gap-6 border-b border-line py-3 last:border-b-0";
 
 const formatValue = (value, fallback = "—") =>
    value === null || value === undefined || value === ""
@@ -47,59 +45,70 @@ const formatKm = (value, digits = 0, fallback = "—") =>
            maximumFractionDigits: digits,
         })} km`;
 
-const InfoChip = ({ label, value }) => (
-   <div className="rounded-full border border-slate-200/80 bg-white/80 px-3 py-1 text-xs text-slate-600 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-200">
-      <span className="font-medium text-slate-900 dark:text-white">
-         {label}:
-      </span>{" "}
-      {value}
-   </div>
+const Eyebrow = ({ children, className = "" }) => (
+   <p
+      className={`font-mono text-[11px] uppercase tracking-[0.18em] text-muted ${className}`}
+   >
+      {children}
+   </p>
 );
 
-const MetricCard = ({
-   label,
-   value,
-   note,
-   tone = "from-violet-500 to-sky-500",
-}) => (
-   <div className={statClassName}>
-      <div className={`h-1.5 w-12 rounded-full bg-linear-to-r ${tone}`} />
-      <p className="mt-3 text-[11px] uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
-         {label}
-      </p>
-      <p className="mt-2 text-xl font-semibold text-slate-900 dark:text-white">
-         {value}
-      </p>
-      {note ? (
-         <p className="mt-1 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
-            {note}
-         </p>
-      ) : null}
-   </div>
-);
+const Badge = ({ tone, children }) => {
+   const tones = {
+      ok: "bg-green-bg text-green-fg",
+      wait: "bg-yellow-bg text-yellow-fg",
+      bad: "bg-red-bg text-red-fg",
+      mute: "bg-sunk text-muted border border-line",
+   };
 
-const SectionTitle = ({ title, subtitle }) => (
-   <div className="mb-3">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-500 dark:text-slate-400">
-         {subtitle}
-      </p>
-      <h3 className="mt-1 text-sm font-semibold text-slate-900 dark:text-white">
-         {title}
-      </h3>
-   </div>
-);
+   return (
+      <span
+         className={`inline-flex items-center rounded-full px-3 py-1 font-mono text-[11px] uppercase tracking-[0.08em] ${tones[tone]}`}
+      >
+         {children}
+      </span>
+   );
+};
 
-const ProgressRow = ({ label, value, percent, accent = "bg-violet-600" }) => (
-   <div className="space-y-1.5">
-      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-         <span>{label}</span>
-         <span className="font-medium text-slate-700 dark:text-slate-200">
-            {value}
-         </span>
+const SectionHead = ({ index, title, meta }) => (
+   <div className="mb-6 flex items-baseline justify-between gap-6 border-b border-line pb-4">
+      <div>
+         <Eyebrow>{index}</Eyebrow>
+         <h3 className="mt-2 text-xl font-medium tracking-[-0.02em] text-ink">
+            {title}
+         </h3>
       </div>
-      <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+      {meta ? <Eyebrow className="shrink-0">{meta}</Eyebrow> : null}
+   </div>
+);
+
+const Row = ({ label, value, mono = true, hint }) => (
+   <div className={rowClassName}>
+      <div>
+         <Eyebrow>{label}</Eyebrow>
+         {hint ? (
+            <p className="mt-1 text-xs leading-relaxed text-muted">{hint}</p>
+         ) : null}
+      </div>
+      <span
+         className={`shrink-0 text-right text-sm text-ink ${
+            mono ? "font-mono tracking-tight" : "font-medium"
+         }`}
+      >
+         {value}
+      </span>
+   </div>
+);
+
+const Meter = ({ label, value, percent, fill }) => (
+   <div>
+      <div className="flex items-baseline justify-between gap-4">
+         <Eyebrow>{label}</Eyebrow>
+         <span className="font-mono text-xs text-body">{value}</span>
+      </div>
+      <div className="mt-2 h-[2px] w-full bg-line">
          <div
-            className={`h-full rounded-full ${accent} transition-all duration-700 ease-out`}
+            className={`h-full ${fill} transition-all duration-700 ease-out`}
             style={{ width: `${Math.max(0, Math.min(100, percent))}%` }}
             aria-hidden
          />
@@ -228,9 +237,9 @@ const GeolocationInformation = () => {
    const weatherStats = useMemo(
       () => [
          {
-            label: "Feels like",
+            label: "Dirasakan",
             value: formatValue(formatFixed(data?.main?.feels_like, 1)),
-            note: "Suhu yang terasa di tubuh",
+            hint: "Suhu yang terasa di tubuh",
          },
          {
             label: "Kelembapan",
@@ -239,7 +248,7 @@ const GeolocationInformation = () => {
                   ? `${data.main.humidity}%`
                   : null,
             ),
-            note: "Kondisi udara saat ini",
+            hint: "Kondisi udara saat ini",
          },
          {
             label: "Angin",
@@ -248,7 +257,7 @@ const GeolocationInformation = () => {
                   ? `${formatFixed(data.wind.speed, 1)} m/s`
                   : null,
             ),
-            note: "Kecepatan angin permukaan",
+            hint: "Kecepatan angin permukaan",
          },
          {
             label: "Tekanan",
@@ -257,7 +266,7 @@ const GeolocationInformation = () => {
                   ? `${data.main.pressure} hPa`
                   : null,
             ),
-            note: "Tekanan atmosfer",
+            hint: "Tekanan atmosfer",
          },
       ],
       [data],
@@ -265,28 +274,14 @@ const GeolocationInformation = () => {
 
    const astroSummary = useMemo(
       () => [
+         { label: "Sunrise", value: formatValue(astro?.sunrise) },
+         { label: "Sunset", value: formatValue(astro?.sunset) },
+         { label: "Solar noon", value: formatValue(astro?.solar_noon) },
+         { label: "Moonrise", value: formatValue(astro?.moonrise) },
+         { label: "Moonset", value: formatValue(astro?.moonset) },
+         { label: "Durasi siang", value: formatValue(astro?.day_length) },
          {
-            label: "Sunrise",
-            value: formatValue(astro?.sunrise),
-         },
-         {
-            label: "Sunset",
-            value: formatValue(astro?.sunset),
-         },
-         {
-            label: "Solar Noon",
-            value: formatValue(astro?.solar_noon),
-         },
-         {
-            label: "Moonrise",
-            value: formatValue(astro?.moonrise),
-         },
-         {
-            label: "Moonset",
-            value: formatValue(astro?.moonset),
-         },
-         {
-            label: "Fase Bulan",
+            label: "Fase bulan",
             value: formatValue(astro?.moon_phase),
          },
       ],
@@ -357,210 +352,170 @@ const GeolocationInformation = () => {
       );
    }, [astro]);
 
+   const busy = loadingLocation || loadingWeather || loadingAstro;
+
    return (
       <motion.section
-         className="w-full overflow-hidden rounded-3xl border border-slate-200/80 bg-linear-to-br from-white via-slate-50 to-sky-50 p-4 text-sm  dark:border-slate-700/70 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
+         className="w-full overflow-hidden rounded-[12px] border border-line p-4 text-sm text-body md:p-5"
          variants={containerVariants}
          initial="hidden"
          animate="show"
       >
-         <motion.div
+         <motion.header
             variants={itemVariants}
-            className="mb-4 flex flex-col gap-3 rounded-3xl border border-slate-200/80 bg-white/80 p-4 backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-900/70"
+            className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
          >
-            <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-               <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">
-                     Geolocation Dashboard
-                  </p>
-                  <h2 className="mt-1 text-lg font-semibold text-slate-900 dark:text-white">
-                     Informasi lokasi, cuaca, dan astronomi
-                  </h2>
-                  <p className="mt-1 max-w-2xl text-xs leading-relaxed text-slate-500 dark:text-slate-400">
-                     Data ini dibaca langsung dari lokasi perangkat untuk
-                     memberi konteks yang lebih jelas tentang kondisi sekitar.
-                  </p>
-               </div>
-
-               <div className="flex flex-wrap gap-2">
-                  <div
-                     className={`rounded-full px-3 py-1 text-xs font-medium ${
-                        error
-                           ? "bg-rose-100 text-rose-700 dark:bg-rose-950/70 dark:text-rose-200"
-                           : loadingLocation || loadingWeather || loadingAstro
-                             ? "bg-amber-100 text-amber-700 dark:bg-amber-950/70 dark:text-amber-200"
-                             : "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/70 dark:text-emerald-200"
-                     }`}
-                  >
-                     {error
-                        ? "Perlu perhatian"
-                        : loadingLocation || loadingWeather || loadingAstro
-                          ? "Memuat data"
-                          : "Aktif"}
-                  </div>
-                  <div className="rounded-full border border-slate-200/80 px-3 py-1 text-xs text-slate-500 dark:border-slate-700/60 dark:text-slate-300">
-                     Lokasi:{" "}
-                     {formatValue(
-                        lat !== null && lon !== null
-                           ? "tersedia"
-                           : "menunggu izin",
-                     )}
-                  </div>
-               </div>
+            <div className="max-w-xl">
+               <Eyebrow>Geolocation Dashboard</Eyebrow>
+               <h2 className="mt-4 text-3xl font-medium leading-[1.1] tracking-[-0.03em] text-ink md:text-4xl">
+                  Informasi lokasi, cuaca, dan astronomi
+               </h2>
+               <p className="mt-4 text-sm leading-relaxed text-muted">
+                  Data ini dibaca langsung dari lokasi perangkat untuk memberi
+                  konteks yang lebih jelas tentang kondisi sekitar.
+               </p>
             </div>
 
-            {error ? (
-               <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-xs text-rose-700 dark:border-rose-900/60 dark:bg-rose-950/40 dark:text-rose-200">
-                  {error}
-               </div>
-            ) : null}
-         </motion.div>
+            <div className="flex shrink-0 flex-wrap gap-2">
+               <Badge tone={error ? "bad" : busy ? "wait" : "ok"}>
+                  {error ? "Perlu perhatian" : busy ? "Memuat data" : "Aktif"}
+               </Badge>
+               <Badge tone="mute">
+                  {hasCoordinates ? "Lokasi tersedia" : "Menunggu izin"}
+               </Badge>
+            </div>
+         </motion.header>
 
-         <div className="grid gap-4 xl:grid-cols-[1.3fr_0.9fr]">
+         {error ? (
+            <motion.div
+               variants={itemVariants}
+               className="mt-6 rounded-[8px] border border-red-bg bg-red-bg px-4 py-3 text-xs text-red-fg"
+            >
+               {error}
+            </motion.div>
+         ) : null}
+
+         <div className="mt-8 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
             <motion.div variants={itemVariants} className={cardClassName}>
-               <SectionTitle
-                  subtitle="Cuaca sekarang"
-                  title="Ringkasan kondisi terkini"
+               <SectionHead
+                  index="01"
+                  title="Cuaca sekarang"
+                  meta={
+                     data?.dt
+                        ? new Date(data.dt * 1000).toLocaleTimeString("id-ID", {
+                             hour: "2-digit",
+                             minute: "2-digit",
+                          })
+                        : "belum ada pembaruan"
+                  }
                />
 
-               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                  <div className="flex items-center gap-4">
-                     <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-linear-to-br from-sky-100 to-indigo-100 dark:from-sky-950/60 dark:to-indigo-950/60">
-                        {loadingWeather || !data ? (
-                           <div className="h-10 w-10 animate-pulse rounded-full bg-slate-300/70 dark:bg-slate-700/70" />
-                        ) : (
-                           <img
-                              src={`https://openweathermap.org/img/wn/${data?.weather?.[0]?.icon}@4x.png`}
-                              alt={
-                                 data?.weather?.[0]?.description ?? "ikon cuaca"
-                              }
-                              className="h-20 w-20 object-contain"
-                           />
+               <div className="flex items-start gap-6">
+                  {loadingWeather || !data ? (
+                     <div className="h-16 w-16 shrink-0 animate-pulse bg-sunk" />
+                  ) : (
+                     <img
+                        src={`https://openweathermap.org/img/wn/${data?.weather?.[0]?.icon}@4x.png`}
+                        alt={data?.weather?.[0]?.description ?? "ikon cuaca"}
+                        className="h-16 w-16 shrink-0 object-contain"
+                     />
+                  )}
+
+                  <div className="min-w-0">
+                     <p className="font-mono text-5xl leading-none tracking-[-0.03em] text-ink md:text-6xl">
+                        {loadingWeather && !data
+                           ? "--"
+                           : formatValue(formatFixed(data?.main?.temp, 1))}
+                        {loadingWeather && !data ? "" : "°C"}
+                     </p>
+                     <p className="mt-4 text-base capitalize text-body">
+                        {formatValue(
+                           data?.weather?.[0]?.description ??
+                              "Menunggu data cuaca",
                         )}
-                     </div>
-
-                     <div>
-                        <p className="text-3xl font-semibold text-slate-900 dark:text-white">
-                           {loadingWeather && !data
-                              ? "--"
-                              : formatValue(formatFixed(data?.main?.temp, 1))}
-                           {loadingWeather && !data ? "" : "°C"}
-                        </p>
-                        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                           {formatValue(
-                              data?.weather?.[0]?.description ??
-                                 "Menunggu data cuaca",
-                           )}
-                        </p>
-                        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                           {formatValue(data?.name)}{" "}
-                           {data?.sys?.country ? `, ${data.sys.country}` : ""}
-                        </p>
-                     </div>
-                  </div>
-
-                  <div className="grid gap-2 sm:grid-cols-2">
-                     <div className="rounded-2xl border border-slate-200/80 bg-slate-50/90 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-800/70">
-                        <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-                           Dirasakan
-                        </p>
-                        <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">
-                           {formatValue(formatFixed(data?.main?.feels_like, 1))}
-                           {data?.main?.feels_like != null ? "°C" : ""}
-                        </p>
-                     </div>
-                     <div className="rounded-2xl border border-slate-200/80 bg-slate-50/90 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-800/70">
-                        <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-                           Terakhir update
-                        </p>
-                        <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">
-                           {data?.dt
-                              ? new Date(data.dt * 1000).toLocaleTimeString(
-                                   "id-ID",
-                                   {
-                                      hour: "2-digit",
-                                      minute: "2-digit",
-                                   },
-                                )
-                              : "—"}
-                        </p>
-                     </div>
+                     </p>
+                     <p className="mt-1 font-mono text-xs text-muted">
+                        {formatValue(data?.name)}
+                        {data?.sys?.country ? `, ${data.sys.country}` : ""}
+                     </p>
                   </div>
                </div>
 
-               <div className="mt-4 flex flex-wrap gap-2">
-                  <InfoChip
-                     label="Koordinat"
-                     value={
-                        lat !== null && lon !== null
-                           ? `${lat.toFixed(4)}, ${lon.toFixed(4)}`
-                           : "belum tersedia"
-                     }
-                  />
-                  <InfoChip
-                     label="Lokasi"
-                     value={formatValue(data?.name ?? "Perangkat aktif")}
-                  />
-                  <InfoChip
-                     label="Zona"
-                     value={astro?.date ? astro.date : "mengikuti perangkat"}
-                  />
-               </div>
-
-               <div className="mt-5 grid gap-3 sm:grid-cols-2">
+               <div className="mt-8">
                   {weatherStats.map((item) => (
-                     <MetricCard
+                     <Row
                         key={item.label}
                         label={item.label}
                         value={item.value}
-                        note={item.note}
+                        hint={item.hint}
                      />
                   ))}
                </div>
+
+               <div className="mt-8 border-t border-line pt-6">
+                  <Eyebrow>Referensi</Eyebrow>
+                  <div className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                     <Row
+                        label="Koordinat"
+                        value={
+                           hasCoordinates
+                              ? `${lat.toFixed(4)}, ${lon.toFixed(4)}`
+                              : "belum tersedia"
+                        }
+                     />
+                     <Row
+                        label="Lokasi"
+                        value={formatValue(data?.name ?? "Perangkat aktif")}
+                     />
+                     <Row
+                        label="Zona waktu"
+                        value={formatValue(
+                           astro?.date ?? "mengikuti perangkat",
+                        )}
+                     />
+                     <Row
+                        label="Jarak pandang"
+                        value={
+                           data?.visibility !== undefined
+                              ? `${data.visibility} m`
+                              : "—"
+                        }
+                     />
+                  </div>
+               </div>
             </motion.div>
 
-            <motion.div variants={itemVariants} className={cardClassName}>
-               <SectionTitle
-                  subtitle="Status perangkat"
-                  title="Konteks lokasi yang sedang dibaca"
-               />
+            <div className="flex flex-col gap-6">
+               <motion.div variants={itemVariants} className={cardClassName}>
+                  <SectionHead index="02" title="Status perangkat" />
 
-               <div className="space-y-3">
-                  <div className="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-slate-700/60 dark:bg-slate-800/70">
-                     <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-                        Izin lokasi
-                     </p>
-                     <p className="mt-2 text-sm font-semibold text-slate-900 dark:text-white">
-                        {loadingLocation
-                           ? "Meminta akses lokasi"
+                  <Row
+                     label="Izin lokasi"
+                     mono={false}
+                     value={
+                        loadingLocation
+                           ? "Meminta akses"
                            : error
                              ? "Tidak berhasil"
-                             : "Berhasil dibaca"}
-                     </p>
-                     <p className="mt-1 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
-                        {error
+                             : "Berhasil dibaca"
+                     }
+                     hint={
+                        error
                            ? "Aktifkan izin lokasi agar dashboard bisa menampilkan data sekitar dengan akurat."
-                           : "Koordinat dipakai untuk mengambil cuaca dan data astronomi secara otomatis."}
-                     </p>
-                  </div>
+                           : "Koordinat dipakai untuk mengambil cuaca dan data astronomi secara otomatis."
+                     }
+                  />
 
-                  <div className="grid gap-3 sm:grid-cols-2">
-                     <MetricCard
+                  <div className="mt-6 space-y-2">
+                     <Row
                         label="Latitude"
                         value={lat !== null ? formatFixed(lat, 4) : "—"}
-                        note="Garis lintang perangkat"
-                        tone="from-cyan-500 to-sky-500"
                      />
-                     <MetricCard
+                     <Row
                         label="Longitude"
                         value={lon !== null ? formatFixed(lon, 4) : "—"}
-                        note="Garis bujur perangkat"
-                        tone="from-indigo-500 to-violet-500"
                      />
-                  </div>
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                     <MetricCard
+                     <Row
                         label="Cuaca"
                         value={
                            loadingWeather && !data
@@ -569,208 +524,155 @@ const GeolocationInformation = () => {
                                    data?.weather?.[0]?.main ?? "Tidak tersedia",
                                 )
                         }
-                        note="Status singkat dari OpenWeather"
-                        tone="from-emerald-500 to-teal-500"
                      />
-                     <MetricCard
+                     <Row
                         label="Astronomi"
                         value={loadingAstro && !astro ? "Memuat" : "Aktif"}
-                        note="Data matahari dan bulan sedang dipantau"
-                        tone="from-amber-500 to-orange-500"
                      />
                   </div>
-               </div>
-            </motion.div>
+               </motion.div>
+
+               <motion.div variants={itemVariants} className={cardClassName}>
+                  <SectionHead index="03" title="Astronomi utama" />
+
+                  <div>
+                     {astroSummary.map((item) => (
+                        <Row
+                           key={item.label}
+                           label={item.label}
+                           value={item.value}
+                        />
+                     ))}
+                  </div>
+
+                  <div className="mt-6 border-t border-line pt-6">
+                     <Meter
+                        label="Cahaya bulan"
+                        value={
+                           moonIllumination !== null
+                              ? `${moonIllumination}%`
+                              : "—"
+                        }
+                        percent={moonIllumination ?? 0}
+                        fill="bg-blue-fg"
+                     />
+                     <p className="mt-3 text-xs leading-relaxed text-muted">
+                        Semakin tinggi nilainya, semakin terang bulan tampak.
+                     </p>
+                  </div>
+               </motion.div>
+            </div>
          </div>
 
          <motion.div
             variants={itemVariants}
-            className="mt-4 grid gap-4 lg:grid-cols-2"
+            className={`mt-6 ${cardClassName}`}
          >
-            <div className={cardClassName}>
-               <SectionTitle
-                  subtitle="Astronomi utama"
-                  title="Data matahari dan bulan"
-               />
+            <SectionHead
+               index="04"
+               title="Jarak dan posisi"
+               meta="skala relatif"
+            />
 
-               <div className="grid gap-3 sm:grid-cols-2">
-                  {astroSummary.map((item) => (
-                     <div key={item.label} className={statClassName}>
-                        <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-                           {item.label}
-                        </p>
-                        <p className="mt-2 text-sm font-semibold text-slate-900 dark:text-white">
-                           {item.value}
-                        </p>
-                     </div>
-                  ))}
+            <div className="grid gap-10 md:grid-cols-3">
+               <div>
+                  <Eyebrow>Jarak</Eyebrow>
+                  <p className="mt-2 font-mono text-xs text-muted">
+                     {astro?.sun_distance != null
+                        ? `${Number(
+                             astro.sun_distance / 1000000,
+                          ).toLocaleString("id-ID", {
+                             maximumFractionDigits: 0,
+                          })} juta km dari Matahari`
+                        : "—"}
+                  </p>
+                  <div className="mt-6 space-y-5">
+                     <Meter
+                        label="Matahari"
+                        value={distanceBars ? `${distanceBars.sun}%` : "—"}
+                        percent={distanceBars?.sun ?? 0}
+                        fill="bg-yellow-fg"
+                     />
+                     <Meter
+                        label="Bulan"
+                        value={distanceBars ? `${distanceBars.moon}%` : "—"}
+                        percent={distanceBars?.moon ?? 0}
+                        fill="bg-blue-fg"
+                     />
+                  </div>
+                  <p className="mt-6 text-xs leading-relaxed text-muted">
+                     Skala logaritmik dipakai agar perbedaan jarak yang sangat
+                     jauh tetap mudah dibaca.
+                  </p>
                </div>
 
-               <div className="mt-4 grid gap-3">
-                  <MetricCard
-                     label="Cahaya bulan"
-                     value={
-                        moonIllumination !== null ? `${moonIllumination}%` : "—"
-                     }
-                     note="Semakin tinggi nilainya, semakin terang bulan tampak"
-                     tone="from-fuchsia-500 to-violet-500"
-                  />
-
-                  <MetricCard
-                     label="Durasi siang"
-                     value={formatValue(astro?.day_length)}
-                     note="Panjang waktu siang pada koordinat saat ini"
-                     tone="from-sky-500 to-cyan-500"
-                  />
+               <div>
+                  <Eyebrow>Altitude</Eyebrow>
+                  <p className="mt-2 font-mono text-xs text-muted">
+                     {formatFixed(astro?.sun_altitude, 2)}° matahari /{" "}
+                     {formatFixed(astro?.moon_altitude, 2)}° bulan
+                  </p>
+                  <div className="mt-6 space-y-5">
+                     <Meter
+                        label="Matahari"
+                        value={altitudeBars ? `${altitudeBars.sun}%` : "—"}
+                        percent={altitudeBars?.sun ?? 0}
+                        fill="bg-yellow-fg"
+                     />
+                     <Meter
+                        label="Bulan"
+                        value={altitudeBars ? `${altitudeBars.moon}%` : "—"}
+                        percent={altitudeBars?.moon ?? 0}
+                        fill="bg-blue-fg"
+                     />
+                  </div>
                </div>
-            </div>
 
-            <div className={cardClassName}>
-               <SectionTitle
-                  subtitle="Visualisasi"
-                  title="Perbandingan jarak dan posisi"
-               />
-
-               <div className="space-y-4">
-                  <div className="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-slate-700/60 dark:bg-slate-800/70">
-                     <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                        <span>Jarak Matahari</span>
-                        <span>
-                           {astro?.sun_distance != null
-                              ? `${Number(
-                                   astro.sun_distance / 1000000,
-                                ).toLocaleString("id-ID", {
-                                   maximumFractionDigits: 0,
-                                })} juta km`
-                              : "—"}
-                        </span>
-                     </div>
-                     <div className="mt-3 space-y-3">
-                        <ProgressRow
-                           label="Matahari"
-                           value={distanceBars ? `${distanceBars.sun}%` : "—"}
-                           percent={distanceBars?.sun ?? 0}
-                           accent="bg-linear-to-r from-amber-500 to-orange-500"
-                        />
-                        <ProgressRow
-                           label="Bulan"
-                           value={distanceBars ? `${distanceBars.moon}%` : "—"}
-                           percent={distanceBars?.moon ?? 0}
-                           accent="bg-linear-to-r from-sky-500 to-violet-500"
-                        />
-                     </div>
-                     <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
-                        Skala logaritmik dipakai agar perbedaan jarak yang
-                        sangat jauh tetap mudah dibaca.
-                     </p>
-                  </div>
-
-                  <div className="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-slate-700/60 dark:bg-slate-800/70">
-                     <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                        <span>Altitude</span>
-                        <span>
-                           {formatFixed(astro?.sun_altitude, 2)}° /{" "}
-                           {formatFixed(astro?.moon_altitude, 2)}°
-                        </span>
-                     </div>
-                     <div className="mt-3 space-y-3">
-                        <ProgressRow
-                           label="Matahari"
-                           value={altitudeBars ? `${altitudeBars.sun}%` : "—"}
-                           percent={altitudeBars?.sun ?? 0}
-                           accent="bg-linear-to-r from-amber-500 to-yellow-400"
-                        />
-                        <ProgressRow
-                           label="Bulan"
-                           value={altitudeBars ? `${altitudeBars.moon}%` : "—"}
-                           percent={altitudeBars?.moon ?? 0}
-                           accent="bg-linear-to-r from-sky-500 to-indigo-500"
-                        />
-                     </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-slate-700/60 dark:bg-slate-800/70">
-                     <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                        <span>Azimuth</span>
-                        <span>
-                           {formatFixed(astro?.sun_azimuth, 2)}° /{" "}
-                           {formatFixed(astro?.moon_azimuth, 2)}°
-                        </span>
-                     </div>
-                     <div className="mt-3 space-y-3">
-                        <ProgressRow
-                           label="Matahari"
-                           value={azimuthBars ? `${azimuthBars.sun}%` : "—"}
-                           percent={azimuthBars?.sun ?? 0}
-                           accent="bg-linear-to-r from-orange-500 to-rose-500"
-                        />
-                        <ProgressRow
-                           label="Bulan"
-                           value={azimuthBars ? `${azimuthBars.moon}%` : "—"}
-                           percent={azimuthBars?.moon ?? 0}
-                           accent="bg-linear-to-r from-indigo-500 to-fuchsia-500"
-                        />
-                     </div>
+               <div>
+                  <Eyebrow>Azimuth</Eyebrow>
+                  <p className="mt-2 font-mono text-xs text-muted">
+                     {formatFixed(astro?.sun_azimuth, 2)}° matahari /{" "}
+                     {formatFixed(astro?.moon_azimuth, 2)}° bulan
+                  </p>
+                  <div className="mt-6 space-y-5">
+                     <Meter
+                        label="Matahari"
+                        value={azimuthBars ? `${azimuthBars.sun}%` : "—"}
+                        percent={azimuthBars?.sun ?? 0}
+                        fill="bg-yellow-fg"
+                     />
+                     <Meter
+                        label="Bulan"
+                        value={azimuthBars ? `${azimuthBars.moon}%` : "—"}
+                        percent={azimuthBars?.moon ?? 0}
+                        fill="bg-blue-fg"
+                     />
                   </div>
                </div>
             </div>
-         </motion.div>
 
-         <motion.div variants={itemVariants} className="mt-4">
-            <div className={cardClassName}>
-               <SectionTitle
-                  subtitle="Detail tambahan"
-                  title="Informasi yang sering dicari"
-               />
-
-               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                  <MetricCard
-                     label="Tanggal"
-                     value={astro?.date ?? "—"}
-                     note="Tanggal yang dipakai oleh layanan astronomi"
-                     tone="from-slate-500 to-slate-700"
+            <div className="mt-10 border-t border-line pt-6">
+               <Eyebrow>Detail tambahan</Eyebrow>
+               <div className="mt-4 grid gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
+                  <Row label="Tanggal" value={astro?.date ?? "—"} />
+                  <Row label="Waktu lokal" value={astro?.current_time ?? "—"} />
+                  <Row
+                     label="Jarak bulan"
+                     value={formatKm(astro?.moon_distance, 0)}
                   />
-                  <MetricCard
-                     label="Waktu lokal"
-                     value={astro?.current_time ?? "—"}
-                     note="Waktu setempat dari lokasi perangkat"
-                     tone="from-cyan-500 to-blue-500"
-                  />
-                  <MetricCard
-                     label="Jarak pandang"
+                  <Row
+                     label="Terakhir update"
                      value={
-                        data?.visibility !== undefined
-                           ? `${data.visibility} m`
+                        data?.dt
+                           ? new Date(data.dt * 1000).toLocaleTimeString(
+                                "id-ID",
+                                {
+                                   hour: "2-digit",
+                                   minute: "2-digit",
+                                },
+                             )
                            : "—"
                      }
-                     note="Jarak pandang udara dari API cuaca"
-                     tone="from-violet-500 to-fuchsia-500"
-                  />
-               </div>
-
-               <div className="mt-4 flex flex-wrap gap-2">
-                  <InfoChip
-                     label="Sunrise"
-                     value={formatValue(astro?.sunrise)}
-                  />
-                  <InfoChip label="Sunset" value={formatValue(astro?.sunset)} />
-                  <InfoChip
-                     label="Moonrise"
-                     value={formatValue(astro?.moonrise)}
-                  />
-                  <InfoChip
-                     label="Moonset"
-                     value={formatValue(astro?.moonset)}
-                  />
-                  <InfoChip
-                     label="Cuaca"
-                     value={formatValue(
-                        data?.weather?.[0]?.main ?? "Tidak tersedia",
-                     )}
-                  />
-                  <InfoChip
-                     label="Jarak Bulan"
-                     value={formatKm(astro?.moon_distance, 0)}
                   />
                </div>
             </div>

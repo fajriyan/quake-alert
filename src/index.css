@@ -3,6 +3,28 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --font-sans: 'SF Pro Display', 'Geist Sans', 'Helvetica Neue', 'Switzer',
+    ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'SF Mono', 'JetBrains Mono', ui-monospace,
+    monospace;
+
+  --color-canvas: #f7f6f3;
+  --color-surface: #ffffff;
+  --color-ink: #111111;
+  --color-body: #2f3437;
+  --color-muted: #787774;
+  --color-line: #eaeaea;
+  --color-sunk: #fbfbfa;
+
+  --color-red-bg: #fdebec;
+  --color-red-fg: #9f2f2d;
+  --color-blue-bg: #e1f3fe;
+  --color-blue-fg: #1f6c9f;
+  --color-green-bg: #edf3ec;
+  --color-green-fg: #346538;
+  --color-yellow-bg: #fbf3db;
+  --color-yellow-fg: #956400;
+
   --animate-fade-in: fadeIn 0.3s ease-out;
 
   @keyframes fadeIn {
@@ -44,5 +66,24 @@
 
   body {
     @apply bg-white dark:bg-gray-900;
+  }
+
+  .dark {
+    --color-canvas: #131312;
+    --color-surface: #1b1b19;
+    --color-ink: #edeae4;
+    --color-body: #c9c6c0;
+    --color-muted: #8f8c85;
+    --color-line: #2a2a27;
+    --color-sunk: #171715;
+
+    --color-red-bg: #2a1b1b;
+    --color-red-fg: #e0a3a1;
+    --color-blue-bg: #16242e;
+    --color-blue-fg: #8dc0e0;
+    --color-green-bg: #1a231a;
+    --color-green-fg: #9dbd9f;
+    --color-yellow-bg: #262013;
+    --color-yellow-fg: #d4b060;
   }
 }
