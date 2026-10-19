@@ -358,8 +358,8 @@ const HomeView = ({ GD, GT, loadGT, driverObj, loadGD }) => {
                                              {GDM?.Kedalaman}
                                           </td>
                                           <td className="whitespace-nowrap ps-4 py-2  group-hover:bg-slate-50 dark:group-hover:bg-slate-200 dark:group-hover:text-slate-900  capitalize">
-                                             {textProcessing(GT?.Wilayah)}
-                                          </td>
+{textProcessing(GDM?.Wilayah)}
+                                           </td>
                                           <td className="whitespace-nowrap px-5 md:px-1 py-2  flex group-hover:bg-slate-50 dark:group-hover:bg-slate-200 dark:group-hover:text-slate-900  hover:underline  relative">
                                              <a
                                                 href={
