@@ -14,7 +14,7 @@ const NotificationToggle = ({ latestEvent, minMagnitude = 5 }) => {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (!saved) {
          setEnabled(false);
-         setPermission(Notification?.permission || "default");
+         setPermission(window.Notification?.permission || "default");
          return;
       }
 
@@ -22,11 +22,11 @@ const NotificationToggle = ({ latestEvent, minMagnitude = 5 }) => {
          const parsed = JSON.parse(saved);
          setEnabled(parsed.enabled && parsed.permission === "granted");
          setPermission(
-            parsed.permission || Notification?.permission || "default",
+            parsed.permission || window.Notification?.permission || "default",
          );
       } catch {
          setEnabled(false);
-         setPermission(Notification?.permission || "default");
+         setPermission(window.Notification?.permission || "default");
       }
    }, []);
 
@@ -35,7 +35,7 @@ const NotificationToggle = ({ latestEvent, minMagnitude = 5 }) => {
       if (typeof window === "undefined") return;
       if (!("Notification" in window)) return;
       if (permission !== "granted") return;
-      if (!latestEvent) return;
+      if (!latestEvent?.Magnitude) return;
 
       const eventId =
          latestEvent?.DateTime ||
