@@ -1,4 +1,5 @@
 import { getDepthCategory } from "./getDepthTag.js";
+import dayjs from "./dayjsConfig.js";
 
 // params: URLSearchParams dengan key q, mg, kedalaman, dari
 export const filterGempa = (rows, params) => {
@@ -22,7 +23,9 @@ export const filterGempa = (rows, params) => {
 
     if (depth && getDepthCategory(row.Kedalaman) !== depth) return false;
 
-    if (dari && String(row.DateTime ?? "").slice(0, 10) < dari) return false;
+    if (dari && dayjs(row.DateTime).tz("Asia/Jakarta").format("YYYY-MM-DD") < dari) {
+      return false;
+    }
 
     return true;
   });

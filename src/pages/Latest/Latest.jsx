@@ -56,7 +56,7 @@ const Latest = () => {
             hotspots={hotspots}
          />
          <AutoRefreshToggle
-            interval={2000}
+            interval={60000}
             onRefresh={async () => {
                await reGD();
             }}

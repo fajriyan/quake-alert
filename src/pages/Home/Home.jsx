@@ -52,7 +52,7 @@ const Home = () => {
         loadGT={loadGT}
       />
       <AutoRefreshToggle
-        interval={2000}
+        interval={60000}
         onRefresh={async () => {
           await reGT();
           await reDG();
