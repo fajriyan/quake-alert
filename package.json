@@ -39,7 +39,9 @@
     "vite-plugin-pwa": "^0.21.1"
   },
   "overrides": {
-    "minimatch": "^10.2.3",
+    "deepmerge": "4.1.2",
+    "glob": "^14.0.3",
+    "minimatch": "^11.0.4",
     "serialize-javascript": "^7.0.3"
   }
 }
