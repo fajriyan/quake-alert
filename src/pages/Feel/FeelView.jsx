@@ -2,10 +2,9 @@ import Chart from "../../components/Chart";
 import Magnitudo from "../../components/Magnitudo";
 import { getRelativeTime } from "../../lib/dateUtils";
 import textProcessing from "../../lib/textProcessing";
-import GempaPerTanggalChart from "../../components/GempaPerTanggalChart";
 import { getDepthTag } from "../../lib/getDepthTag";
-import HotspotCard from "../../components/HotspotCard";
 import FilterBar from "../../components/FilterBar";
+import RegionalSummary from "../../components/RegionalSummary";
 
 const FeelView = ({
    setIsOpen,
@@ -238,45 +237,7 @@ const FeelView = ({
                      </span>
                   </div>
 
-                  <div className="mt-6">
-                     <div className="flex items-center justify-between mb-3">
-                        <h2 className="text-lg font-bold text-slate-800 dark:text-neutral-100">
-                           Rangkuman Data Gempa berdasarkan Wilayah
-                        </h2>
-                        <span className="text-xs text-slate-400 dark:text-neutral-500">
-                           {hotspots.length} cluster ·{" "}
-                           {hotspots.reduce((s, h) => s + h.count, 0)} kejadian
-                        </span>
-                     </div>
-
-                     {hotspots.length === 0 ? (
-                        <p className="text-sm text-slate-400 dark:text-neutral-500">
-                           Belum ada cluster terdeteksi.
-                        </p>
-                     ) : (
-                        <div className="grid md:grid-cols-3 gap-4">
-                           {hotspots.map((spot, i) => (
-                              <HotspotCard
-                                 key={i}
-                                 cluster={spot}
-                                 rank={i + 1}
-                              />
-                           ))}
-                        </div>
-                     )}
-                  </div>
-
-                  <div className="flex flex-col md:flex-row gap-5 pt-10">
-                     <div className="md:w-[50%]">
-                        <GempaPerTanggalChart data={GD} />
-                     </div>
-                     <div className="md:w-[50%] border rounded-md p-5">
-                        <h2 className="text-lg font-semibold mb-4">
-                           Grafik Magnitudo
-                        </h2>
-                        <Chart dataProps={GD} />
-                     </div>
-                  </div>
+                  <RegionalSummary GD={GD} hotspots={hotspots} />
                </div>
             </div>
 
