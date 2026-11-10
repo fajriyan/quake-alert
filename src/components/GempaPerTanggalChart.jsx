@@ -57,8 +57,9 @@ export default function GempaPerTanggalChart({ data = [] }) {
       legend: {
         display: true,
         labels: {
-          color: "#581c87",
+          color: "#8f8c85",
           font: {
+            family: "monospace",
             weight: "600",
           },
         },
@@ -73,29 +74,35 @@ export default function GempaPerTanggalChart({ data = [] }) {
         beginAtZero: true,
         ticks: {
           precision: 0,
+          color: "#8f8c85",
+        },
+        grid: {
+          color: "rgba(120, 119, 116, 0.15)",
         },
         title: {
           display: true,
           text: "Jumlah Gempa",
-          color: "#581c87",
+          color: "#8f8c85",
         },
       },
       x: {
+        ticks: {
+          color: "#8f8c85",
+        },
+        grid: {
+          display: false,
+        },
         title: {
           display: true,
           text: "Tanggal",
-          color: "#581c87",
+          color: "#8f8c85",
         },
       },
     },
   };
 
   return (
-    <div className="w-full dark:bg-white rounded-md border border-gray-200 p-4">
-      <h2 className="text-lg font-semibold mb-4 ">
-        Jumlah Gempa per Tanggal
-      </h2>
-
+    <div className="w-full">
       <Bar data={chartData} options={options} />
     </div>
   );

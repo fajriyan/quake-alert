@@ -35,8 +35,10 @@ const Chart = ({ dataProps }) => {
       {
         label: "Magnitude Gempa",
         data: magnitudes,
-        borderColor: "rgb(10 28 135 / 1)",
-        backgroundColor: "rgb(88 28 135 / 1)",
+        borderColor: "#7c3aed",
+        backgroundColor: "rgba(124, 58, 237, 0.15)",
+        pointBackgroundColor: "#7c3aed",
+        fill: true,
         tension: 0.2,
       },
     ],
@@ -47,6 +49,13 @@ const Chart = ({ dataProps }) => {
     plugins: {
       legend: {
         display: true,
+        labels: {
+          color: "#8f8c85",
+          font: {
+            family: "monospace",
+            weight: "600",
+          },
+        },
       },
       tooltip: {
         enabled: true,
@@ -61,15 +70,29 @@ const Chart = ({ dataProps }) => {
     },
     scales: {
       x: {
+        ticks: {
+          color: "#8f8c85",
+        },
+        grid: {
+          display: false,
+        },
         title: {
           display: true,
           text: "Waktu Kejadian (WIB)",
+          color: "#8f8c85",
         },
       },
       y: {
+        ticks: {
+          color: "#8f8c85",
+        },
+        grid: {
+          color: "rgba(120, 119, 116, 0.15)",
+        },
         title: {
           display: true,
           text: "Magnitude",
+          color: "#8f8c85",
         },
         beginAtZero: false,
       },
